@@ -77,7 +77,7 @@ server {
 	location ~* /(uploads|cache|media|logs|tmp|languages)/.*\.(php|pl|py|jsp|asp|sh|cgi)$ {
 		return 403;
 		error_page 403 /403_error.html;
-    }
+	}
 	#
 	# deny access to .htaccess vb. files, if Apache's document root
 	location ~/\. {
