@@ -208,15 +208,35 @@ docker container restart <wordpress_container_id>
 add and/or remove wordpress site folders and files with any ftp client program in ```./wordpress``` folder.
 <br />You can also visit `https://example.com` to access website after starting the containers.
 
-#### Redis
+#### Redis Plugin
 
-set and enable cache option at global configuration [Redis Cache](https://example.com/administrator/).
+add and enable [Redis Cache](https://wordpress.org/plugins/redis-cache/) plugin and
 
-Cache Handler = redis
+must add below code in wp-config.php file.
 
-Redis Server Host = redis
+```
+define('WP_REDIS_HOST', 'redis');
+define('WP_CACHE_KEY_SALT', 'wp-docker-7f1a7682-9aec-4d4b-9a10-46bbadec41ba');
+define('WP_REDIS_PREFIX', $_SERVER['HTTP_HOST']);
+define('WP_REDIS_CONFIG', [
+	'prefix' => getenv('WP_REDIS_PREFIX') ?: null,
+    'timeout' => 0.5,
+    'read_timeout' => 0.5,
+    'async_flush' => true,
+    'compression' => 'zstd',
+    'serializer' => 'igbinary',
+    'split_alloptions' => true,
+    'debug' => false,
+    'save_commands' => false,
+]);
+```
 
-Redis Server Port = 6379
+add this code to connect always with ssl in wp-config.php file.
+
+```
+define('FORCE_SSL_LOGIN', true);
+define('FORCE_SSL_ADMIN', true);
+```
 
 ### phpMyAdmin
 
