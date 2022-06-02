@@ -1,0 +1,113 @@
+upstream docker_webserver {
+	server	wordpress:9000;
+}
+
+server_tokens off;
+
+server {
+	listen ${NGINX_PORT} default_server;
+	listen [::]:${NGINX_PORT} ipv6only=on default_server;
+	#
+	server_name ${NGINX_HOST} www.${NGINX_HOST};
+	#
+	location ~ ^/.well-known/acme-challenge/ {
+		root /tmp/acme-challenge;
+	}
+	#
+	#location / {
+		#port_in_redirect off;
+		#return 301 https://$host$request_uri;
+	#}
+}
+
+server {
+	#listen 443 ssl http2;
+	#listen [::]:443 ipv6only=on ssl http2;
+	#
+	server_name ${NGINX_HOST} www.${NGINX_HOST};
+	#
+	#ssl_certificate /etc/letsencrypt/live/${NGINX_HOST}/fullchain.pem;
+	#ssl_certificate_key /etc/letsencrypt/live/${NGINX_HOST}/privkey.pem;
+	#ssl_trusted_certificate /etc/letsencrypt/live/${NGINX_HOST}/chain.pem;
+	#ssl_dhparam /etc/letsencrypt/ssl-dhparam.pem;
+	include /etc/letsencrypt/options-ssl-nginx.conf;
+    
+	# global gzip on
+	gzip on;
+	gzip_http_version 1.1;
+	gzip_comp_level 6;
+	gzip_min_length 1100;
+	gzip_buffers 4 8k;
+	gzip_types text/plain application/xhtml+xml text/css application/xml application/xml+rss text/javascript application/javascript application/x-javascript
+	gzip_proxied	any;
+	gzip_disable	"MSIE [1-6]\.";
+
+	# add global x-content-type-options header
+	add_header X-Content-Type-Options nosniff;	
+	
+	root /var/www/html;
+	
+	location / {
+		try_files $uri /index.php$is_args$args;
+	}
+	
+	location ~ [^/]\.php(/|$) {
+		fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+		if (!-f $document_root$fastcgi_script_name) {
+			return 404;
+		}
+
+		# Mitigate https://httpoxy.org/ vulnerabilities
+		fastcgi_param HTTP_PROXY "";
+
+		fastcgi_pass docker_webserver;
+		fastcgi_index index.php;
+
+		# include the fastcgi_param setting
+		include fastcgi_params;
+
+		# SCRIPT_FILENAME parameter is used for PHP FPM determining
+		#  the script name. If it is not set in fastcgi_params file,
+		# i.e. /etc/nginx/fastcgi_params or in the parent contexts,
+		# please comment off following line:
+		fastcgi_param  SCRIPT_FILENAME   $document_root$fastcgi_script_name;
+	}
+	#
+	# deny running scripts inside writable directories
+	location ~* /(uploads|cache|media|logs|tmp|languages)/.*\.(php|pl|py|jsp|asp|sh|cgi)$ {
+		return 403;
+		error_page 403 /403_error.html;
+    }
+	#
+	# deny access to .htaccess vb. files, if Apache's document root
+	location ~/\. {
+		deny all;     
+		log_not_found off;
+	}
+	#
+	location ~*  \.(svg|svgz)$ {
+        types {}
+        default_type image/svg+xml;
+	}
+	location = /favicon.ico {
+		log_not_found off;
+		access_log off;
+	}
+	location = /robots.txt {
+		allow all;
+		log_not_found off;
+		access_log off;
+	} 
+	#
+	# caching of files 
+	location ~* \.(ico|pdf|flv)$ {
+		expires 1y;
+	}
+	location ~* \.(js|css|png|jpg|jpeg|gif|swf|xml|txt|ico)$ {
+		expires max;
+		log_not_found off;
+	}
+	#
+	access_log off;
+	error_log  /var/log/nginx/${NGINX_HOST}.error.log error;
+}
