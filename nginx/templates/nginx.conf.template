@@ -103,7 +103,7 @@ server {
 	location ~* \.(ico|pdf|flv)$ {
 		expires 1y;
 	}
-	location ~* \.(js|css|png|jpg|jpeg|gif|swf|xml|txt|ico)$ {
+	location ~* \.(js|css|png|jpg|jpeg|gif|swf|xml|txt)$ {
 		expires max;
 		log_not_found off;
 	}
