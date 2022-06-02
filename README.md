@@ -1,4 +1,4 @@
-# full stack nginx wordpress for everyone with docker compose
+# [full stack nginx wordpress for everyone with docker compose](https://github.com/damalis/full-stack-nginx-wordpress-for-everyone-with-docker-compose)
 
 If You want to have a wordpress website at short time; 
 
@@ -11,7 +11,7 @@ Plus, manage docker containers with Portainer.
 With this project you can quickly run the following:
 
 - [wordpress (php-fpm)](https://hub.docker.com/_/wordpress)
-- [proxy (nginx)](https://hub.docker.com/_/nginx)
+- [nginx](https://hub.docker.com/_/nginx)
 - [certbot (letsencrypt)](https://hub.docker.com/r/certbot/certbot)
 - [phpMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/)
 - [database](https://hub.docker.com/_/mariadb)
