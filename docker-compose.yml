@@ -6,7 +6,7 @@ services:
         depends_on:
             - database
         image: 'wordpress:${PHP_IMAGE_NAME}'
-        container_name: 'wp-${PHP_IMAGE_NAME}'
+        container_name: wordpress
         networks:
             - backend            
         volumes:
