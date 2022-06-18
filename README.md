@@ -237,10 +237,15 @@ define('WP_REDIS_CONFIG', [
 add and active [Proxy Cache Purge](https://wordpress.org/plugins/varnish-http-purge/) plugin.
 
 Go to the WordPress dashboard
+
 Click on Plugins
+
 Click on Add New
+
 Search for the Redis Cache / the Proxy Cache Purge plugin
+
 Click on Install Now and confirm
+
 Finally, activate the plugin
 
 add this code to connect always with ssl in wp-config.php file.
