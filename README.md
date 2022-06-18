@@ -211,7 +211,7 @@ add and/or remove wordpress site folders and files with any ftp client program i
 
 #### Redis Plugin
 
-add and enable [Redis Cache](https://wordpress.org/plugins/redis-cache/) plugin and
+add and active [Redis Cache](https://wordpress.org/plugins/redis-cache/) plugin and
 
 must add below code in wp-config.php file.
 
@@ -231,6 +231,17 @@ define('WP_REDIS_CONFIG', [
     'save_commands' => false,
 ]);
 ```
+
+#### Varnish Plugin
+
+add and active [Proxy Cache Purge](https://wordpress.org/plugins/varnish-http-purge/) plugin.
+
+Go to the WordPress dashboard
+Click on Plugins
+Click on Add New
+Search for the Redis Cache / the Proxy Cache Purge plugin
+Click on Install Now and confirm
+Finally, activate the plugin
 
 add this code to connect always with ssl in wp-config.php file.
 
