@@ -24,7 +24,6 @@ services:
         links:
             - database
             - redis
-            - varnish
         environment:
             WORDPRESS_DB_HOST: 'database'
             WORDPRESS_DB_USER: '${WORDPRESS_DB_USER}'
@@ -206,6 +205,8 @@ services:
         restart: unless-stopped
         ports:
             - '8080:80'
+        links:
+            - wordpress
         environment:
             VARNISH_SIZE: '${VARNISH_SIZE}'
             TZ: '${LOCAL_TIMEZONE}'
