@@ -151,6 +151,18 @@ do
 done
 echo "Ok."
 
+db_table_prefix_regex="^[0-9a-zA-Z\$_]{3,}$"
+read -p 'Enter Database Table Prefix(at least 3 characters, default : wp_): ' db_table_prefix
+: ${db_table_prefix:=wp_}
+while [[ ! $db_table_prefix =~ $db_table_prefix_regex ]]
+do
+	echo "Try again (can only contain numerals 0-9, basic Latin letters, both lowercase and uppercase, dollar sign and underscore)"
+	read -p 'Enter Database Table Prefix(at least 3 characters, default : wp_): ' db_table_prefix
+	: ${db_table_prefix:=wp_}
+	sleep 1
+done
+echo "Ok."
+
 mysql_root_password=""
 read -p 'Enter MariaDb/Mysql Root Password(at least 6 characters): ' mysql_root_password
 while [[ ! $mysql_root_password =~ $password_regex ]]
@@ -211,6 +223,7 @@ sed -i 's/email@domain.com/'$email'/' .env
 sed -i 's/db_username/'$db_username'/g' .env
 sed -i 's/db_password/'$db_password'/g' .env
 sed -i 's/db_name/'$db_name'/' .env
+sed -i 's/db_table_prefix/'$db_table_prefix'/' .env
 sed -i 's/mysql_root_password/'$mysql_root_password'/' .env
 sed -i 's/pma_username/'$pma_username'/' .env
 sed -i 's/pma_password/'$pma_password'/' .env
