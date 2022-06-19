@@ -4,7 +4,7 @@ import std;
 
 backend default {
     .host = "wordpress";
-    .port = "8080";
+    .port = "9000";
 }
 
 # Add hostnames, IP addresses and subnets that are allowed to purge content
