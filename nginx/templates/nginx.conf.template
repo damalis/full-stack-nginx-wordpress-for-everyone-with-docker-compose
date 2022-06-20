@@ -65,7 +65,7 @@ server {
 		proxy_set_header	X-Forwarded-Port	$server_port;	
 		proxy_set_header Upgrade	$http_upgrade;
 		proxy_set_header Connection	"Upgrade";		
-		proxy_set_header	X-Forwarded-Ssl	$proxy_x_forwarded_ssl;		
+			
 		#
 		proxy_redirect	off;
 		proxy_buffering	on;
@@ -120,8 +120,8 @@ server {
 }
 
 server {
-	listen 81 default_server;
-	listen [::]:81 ipv6only=on default_server;
+	#listen 81;
+	#listen [::]:81 ipv6only=on;
 	#
 	server_name ${NGINX_HOST} www.${NGINX_HOST};
 	#
