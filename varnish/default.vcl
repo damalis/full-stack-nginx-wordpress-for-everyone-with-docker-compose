@@ -3,13 +3,13 @@ vcl 4.1;
 import std;
 
 backend default {
-    .host = "wordpress";
-    .port = "9000";
+    .host = "webserver";
+    .port = "81";
 }
 
 # Add hostnames, IP addresses and subnets that are allowed to purge content
 acl purge {
-    "wordpress";
+    "webserver";
     "localhost";
     "127.0.0.1";
     "::1";
