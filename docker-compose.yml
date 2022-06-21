@@ -212,7 +212,7 @@ services:
             TZ: '${LOCAL_TIMEZONE}'
         labels:            
             - "docker-volume-backup.stop-during-backup=true"
-        command: "-p default_keep=300"
+        command: "-a http=:8080,HTTP -p default_keep=300"
     
     backup:
         image: 'futurice/docker-volume-backup'
