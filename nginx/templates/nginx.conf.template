@@ -49,11 +49,7 @@ server {
 	gzip_buffers 4 8k;
 	gzip_types text/plain application/xhtml+xml text/css application/xml application/xml+rss text/javascript application/javascript application/x-javascript
 	gzip_proxied	any;
-	gzip_disable	"MSIE [1-6]\.";
-
-	# add global x-content-type-options header
-	add_header Cache-Control public;
-	add_header X-Cache-Status $upstream_cache_status;	
+	gzip_disable	"MSIE [1-6]\.";	
 	
 	location / {		
 		proxy_pass	http://docker_varnish;		
@@ -74,7 +70,7 @@ server {
 		proxy_connect_timeout	90;
 		proxy_send_timeout	90;
 		proxy_read_timeout	90;
-		proxy_request_buffering off;
+		proxy_request_buffering	off;
 		#
 		# Mitigate httpoxy attack
 		proxy_set_header Proxy "";        
@@ -104,16 +100,7 @@ server {
 		allow all;
 		log_not_found off;
 		access_log off;
-	} 
-	#
-	# caching of files 
-	location ~* \.(ico|pdf|flv)$ {
-		expires 1y;
-	}
-	location ~* \.(js|css|png|jpg|jpeg|gif|swf|xml|txt)$ {
-		expires max;
-		log_not_found off;
-	}
+	}	
 	#
 	access_log off;
 	error_log  /var/log/nginx/${NGINX_HOST}.error.log error;
@@ -139,7 +126,7 @@ server {
 		}
 
 		# Mitigate https://httpoxy.org/ vulnerabilities
-		fastcgi_param HTTP_PROXY "";
+		fastcgi_param HTTP_PROXY "";		
 
 		fastcgi_pass docker_webserver;
 		fastcgi_index index.php;
