@@ -10,6 +10,7 @@ backend default {
 # Add hostnames, IP addresses and subnets that are allowed to purge content
 acl purge {
     "webserver";
+	"wordpress";
     "localhost";
     "127.0.0.1";
     "::1";
