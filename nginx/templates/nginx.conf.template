@@ -6,7 +6,13 @@ upstream docker_varnish  {
 	server	varnish:8080;
 }
 
+map $scheme $proxy_x_forwarded_ssl {
+	default off;
+	https on;
+}
+
 server_tokens off;
+proxy_hide_header X-Powered-By;
 
 server {
 	listen ${NGINX_PORT} default_server;
@@ -60,7 +66,8 @@ server {
 		proxy_set_header	X-Forwarded-Host	$host;
 		proxy_set_header	X-Forwarded-Port	$server_port;	
 		proxy_set_header Upgrade	$http_upgrade;
-		proxy_set_header Connection	"Upgrade";		
+		proxy_set_header Connection	"Upgrade";
+		proxy_set_header	X-Forwarded-Ssl	$proxy_x_forwarded_ssl;		
 			
 		#
 		proxy_redirect	off;
@@ -126,7 +133,8 @@ server {
 		}
 
 		# Mitigate https://httpoxy.org/ vulnerabilities
-		fastcgi_param HTTP_PROXY "";		
+		fastcgi_param HTTP_PROXY "";
+		fastcgi_param HTTPS $scheme;		
 
 		fastcgi_pass docker_webserver;
 		fastcgi_index index.php;
