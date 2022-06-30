@@ -96,8 +96,8 @@ server {
 	}
 	#
 	location ~*  \.(svg|svgz)$ {
-        types {}
-        default_type image/svg+xml;
+		types {}
+		default_type image/svg+xml;
 	}
 	location = /favicon.ico {
 		log_not_found off;
@@ -127,7 +127,7 @@ server {
 	}
 	
 	location /wp-admin {
-        try_files $uri $uri/ /wp-admin/index.php?$args;
+        try_files $uri /wp-admin/index.php$is_args$args;
     }
 	
 	location ~ [^/]\.php(/|$) {
