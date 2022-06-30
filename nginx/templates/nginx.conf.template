@@ -126,6 +126,10 @@ server {
 		try_files $uri /index.php$is_args$args;
 	}
 	
+	location /wp-admin {
+        try_files $uri $uri/ /wp-admin/index.php?$args;
+    }
+	
 	location ~ [^/]\.php(/|$) {
 		fastcgi_split_path_info ^(.+?\.php)(/.*)$;
 		if (!-f $document_root$fastcgi_script_name) {
