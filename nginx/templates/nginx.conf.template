@@ -127,8 +127,8 @@ server {
 	}
 	
 	location /wp-admin {
-        try_files $uri /wp-admin/index.php$is_args$args;
-    }
+		try_files $uri /wp-admin/index.php$is_args$args;
+	}
 	
 	location ~ [^/]\.php(/|$) {
 		fastcgi_split_path_info ^(.+?\.php)(/.*)$;
