@@ -5,6 +5,9 @@ import std;
 backend default {
     .host = "webserver";
     .port = "81";
+    .probe = {
+	    .expected_response = 302;
+    }
 }
 
 # Add hostnames, IP addresses and subnets that are allowed to purge content
