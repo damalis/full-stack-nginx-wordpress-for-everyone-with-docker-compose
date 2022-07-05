@@ -55,7 +55,10 @@ server {
 	gzip_buffers 4 8k;
 	gzip_types text/plain application/xhtml+xml text/css application/xml application/xml+rss text/javascript application/javascript application/x-javascript
 	gzip_proxied	any;
-	gzip_disable	"MSIE [1-6]\.";	
+	gzip_disable	"MSIE [1-6]\.";
+
+	add_header Cache-Control public;
+	add_header X-Cache-Status $upstream_cache_status;	
 	
 	location / {		
 		proxy_pass	http://docker_varnish;		
