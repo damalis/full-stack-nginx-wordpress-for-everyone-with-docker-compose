@@ -62,10 +62,9 @@ sub vcl_recv {
         return (pipe);
     }
 
-    # To pass all incoming certificate server challenge requests through to certbot. 
+    # LetsEncrypt Certbot passthrough
     if (req.url ~ "^/\.well-known/acme-challenge/") {
-        set req.backend_hint = certbot;
-        return(pipe);
+        return (pass);
     }
 	
     # Remove tracking query string parameters used by analytics tools
@@ -151,9 +150,9 @@ sub vcl_hash {
 }
 
 sub vcl_hit {
-	set req.http.x-cache-status = "hit";
+	set req.http.x-cache-status = "HIT";
 	if (obj.ttl <= 0s && obj.grace > 0s) {
-		set req.http.x-cache-status = "hit graced";
+		set req.http.x-cache-status = "HIT graced";
 	}
 	
 	if (req.method == "PURGE") {
@@ -162,7 +161,7 @@ sub vcl_hit {
 }
 
 sub vcl_miss {
-	set req.http.x-cache-status = "miss";
+	set req.http.x-cache-status = "MISS";
 	
 	if (req.method == "PURGE") {
 		return(synth(404, "Not cached"));
@@ -170,16 +169,11 @@ sub vcl_miss {
 }
 
 sub vcl_pass {
-	set req.http.x-cache-status = "pass";
+	set req.http.x-cache-status = "PASS";
 }
 
 sub vcl_pipe {
 	set req.http.x-cache-status = "pipe uncacheable";
-	
-    if (req.backend_hint == certbot) {
-        set req.http.Connection = "close";
-        return(pipe);
-    }
 }
 
 sub vcl_synth {
@@ -244,6 +238,7 @@ sub vcl_deliver {
     }
 
 	set resp.http.x-cache-status = req.http.x-cache-status;
+	set resp.http.x-varnish = resp.http.x-varnish + ", " + req.http.x-cache-status;
 	
     # Cleanup of headers
     unset resp.http.x-url;
