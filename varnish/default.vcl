@@ -211,7 +211,7 @@ sub vcl_backend_response {
 	# Remove the Set-Cookie header when a specific Wordfence cookie is set
     if (beresp.http.Set-Cookie ~ "wfvt_|wordfence_verifiedHuman") {
 	    unset beresp.http.Set-Cookie;
-	 }
+	}
 	
     if (beresp.http.Set-Cookie) {
         set beresp.http.X-Cacheable = "NO:Got Cookies";
@@ -237,8 +237,8 @@ sub vcl_deliver {
         set resp.http.X-Cacheable = "YES";
     }
 
-	set resp.http.x-cache-status = req.http.x-cache-status;
-	set resp.http.x-varnish = resp.http.x-varnish + ", " + req.http.x-cache-status;
+    set resp.http.x-cache-status = req.http.x-cache-status;
+    set resp.http.x-varnish = resp.http.x-varnish + ", " + req.http.x-cache-status;
 	
     # Cleanup of headers
     unset resp.http.x-url;
