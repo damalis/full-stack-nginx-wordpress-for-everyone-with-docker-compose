@@ -25,14 +25,14 @@ sub vcl_recv {
 
     # Remove port number from host header
     set req.http.Host = regsub(req.http.Host, ":[0-9]+", "");
-
+	
     # Sorts query string parameters alphabetically for cache normalization purposes
     set req.url = std.querysort(req.url);
 
     # Remove the proxy header to mitigate the httpoxy vulnerability
     # See https://httpoxy.org/
     unset req.http.proxy;
-
+	
     # Purge logic to remove objects from the cache. 
     # Tailored to the Proxy Cache Purge WordPress plugin
     # See https://wordpress.org/plugins/varnish-http-purge/
@@ -62,6 +62,12 @@ sub vcl_recv {
         return (pipe);
     }
 
+    # To pass all incoming certificate server challenge requests through to certbot. 
+    if (req.url ~ "^/\.well-known/acme-challenge/") {
+        set req.backend_hint = certbot;
+        return(pipe);
+    }
+	
     # Remove tracking query string parameters used by analytics tools
     if (req.url ~ "(\?|&)(utm_source|utm_medium|utm_campaign|utm_content|gclid|cx|ie|cof|siteurl)=") {
         set req.url = regsuball(req.url, "&(utm_source|utm_medium|utm_campaign|utm_content|gclid|cx|ie|cof|siteurl)=([A-z0-9_\-\.%25]+)", "");
@@ -128,6 +134,9 @@ sub vcl_recv {
 	     }
         return(pass);
     }
+	
+	# Remove x-cache-status header
+    unset req.http.x-cache-status;
 
     # Remove any cookies left
     unset req.http.Cookie;
@@ -138,6 +147,51 @@ sub vcl_hash {
     if(req.http.X-Forwarded-Proto) {
         # Create cache variations depending on the request protocol       
         hash_data(req.http.X-Forwarded-Proto);
+    }
+}
+
+sub vcl_hit {
+	set req.http.x-cache-status = "hit";
+	if (obj.ttl <= 0s && obj.grace > 0s) {
+		set req.http.x-cache-status = "hit graced";
+	}
+	
+	if (req.method == "PURGE") {
+		return(synth(200, "OK"));
+	}
+}
+
+sub vcl_miss {
+	set req.http.x-cache-status = "miss";
+	
+	if (req.method == "PURGE") {
+		return(synth(404, "Not cached"));
+	}
+}
+
+sub vcl_pass {
+	set req.http.x-cache-status = "pass";
+}
+
+sub vcl_pipe {
+	set req.http.x-cache-status = "pipe uncacheable";
+	
+    if (req.backend_hint == certbot) {
+        set req.http.Connection = "close";
+        return(pipe);
+    }
+}
+
+sub vcl_synth {
+	set req.http.x-cache-status = "synth synth";
+	# uncomment the following line to show the information in the response
+	set resp.http.x-cache-status = req.http.x-cache-status;
+	
+	# redirect for http
+    if (resp.status == 750) {
+        set resp.status = 301;
+        set resp.http.Location = req.http.x-redir;
+        return(deliver);
     }
 }
 
@@ -173,6 +227,11 @@ sub vcl_backend_response {
 }
 
 sub vcl_deliver {
+    # oh noes backend is down
+    if (resp.status == 503) {
+        return(restart);
+    }
+	
     # Debug header
     if(req.http.X-Cacheable) {
         set resp.http.X-Cacheable = req.http.X-Cacheable;    
@@ -183,7 +242,9 @@ sub vcl_deliver {
     } elseif(!resp.http.X-Cacheable) {
         set resp.http.X-Cacheable = "YES";
     }
-    
+
+	set resp.http.x-cache-status = req.http.x-cache-status;
+	
     # Cleanup of headers
     unset resp.http.x-url;
     unset resp.http.x-host;    
