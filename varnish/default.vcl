@@ -208,10 +208,10 @@ sub vcl_backend_response {
         set beresp.ttl = 1d;
     }
 
-	# Remove the Set-Cookie header when a specific Wordfence cookie is set
+    # Remove the Set-Cookie header when a specific Wordfence cookie is set
     if (beresp.http.Set-Cookie ~ "wfvt_|wordfence_verifiedHuman") {
-	    unset beresp.http.Set-Cookie;
-	}
+        unset beresp.http.Set-Cookie;
+    }
 	
     if (beresp.http.Set-Cookie) {
         set beresp.http.X-Cacheable = "NO:Got Cookies";
