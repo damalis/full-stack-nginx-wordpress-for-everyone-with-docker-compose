@@ -150,38 +150,38 @@ sub vcl_hash {
 }
 
 sub vcl_hit {
-	set req.http.x-cache-status = "HIT";
-	if (obj.ttl <= 0s && obj.grace > 0s) {
-		set req.http.x-cache-status = "HIT graced";
-	}
+    set req.http.x-cache-status = "HIT";
+    if (obj.ttl <= 0s && obj.grace > 0s) {
+        set req.http.x-cache-status = "HIT graced";
+    }
 	
-	if (req.method == "PURGE") {
-		return(synth(200, "OK"));
-	}
+    if (req.method == "PURGE") {
+        return(synth(200, "OK"));
+    }
 }
 
 sub vcl_miss {
-	set req.http.x-cache-status = "MISS";
+    set req.http.x-cache-status = "MISS";
 	
-	if (req.method == "PURGE") {
-		return(synth(404, "Not cached"));
-	}
+    if (req.method == "PURGE") {
+        return(synth(404, "Not cached"));
+    }
 }
 
 sub vcl_pass {
-	set req.http.x-cache-status = "PASS";
+    set req.http.x-cache-status = "PASS";
 }
 
 sub vcl_pipe {
-	set req.http.x-cache-status = "pipe uncacheable";
+    set req.http.x-cache-status = "pipe uncacheable";
 }
 
 sub vcl_synth {
-	set req.http.x-cache-status = "synth synth";
-	# uncomment the following line to show the information in the response
-	set resp.http.x-cache-status = req.http.x-cache-status;
+    set req.http.x-cache-status = "synth synth";
+    # uncomment the following line to show the information in the response
+    set resp.http.x-cache-status = req.http.x-cache-status;
 	
-	# redirect for http
+    # redirect for http
     if (resp.status == 750) {
         set resp.status = 301;
         set resp.http.Location = req.http.x-redir;
