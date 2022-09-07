@@ -122,10 +122,10 @@ sub vcl_recv {
         req.url ~ "^/preview=" ||
         req.url ~ "^/\.well-known/acme-challenge/"
     ) {
-	    set req.http.X-Cacheable = "NO:Logged in/Got Sessions";
-	    if(req.http.X-Requested-With == "XMLHttpRequest") {
-		    set req.http.X-Cacheable = "NO:Ajax";
-	    }
+        set req.http.X-Cacheable = "NO:Logged in/Got Sessions";
+        if(req.http.X-Requested-With == "XMLHttpRequest") {
+			set req.http.X-Cacheable = "NO:Ajax";
+        }
         return(pass);
     }
 	
