@@ -61,11 +61,6 @@ sub vcl_recv {
     ) {
         return (pipe);
     }
-
-    # LetsEncrypt Certbot passthrough
-    if (req.url ~ "^/\.well-known/acme-challenge/") {
-        return (pass);
-    }
 	
     # Remove tracking query string parameters used by analytics tools
     if (req.url ~ "(\?|&)(utm_source|utm_medium|utm_campaign|utm_content|gclid|cx|ie|cof|siteurl)=") {
