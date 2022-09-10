@@ -126,7 +126,7 @@ server {
 		try_files $uri /index.php$is_args$args;
 	}
 	
-	location /wp-admin {
+	location /wp-admin/ {
 		try_files $uri /wp-admin/index.php$is_args$args;
 	}
 	
