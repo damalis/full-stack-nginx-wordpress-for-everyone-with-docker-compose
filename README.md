@@ -8,7 +8,7 @@ Full stack Nginx Wordpress:
 
 Plus, manage docker containers with Portainer.
 
-With this project you can quickly run the following:
+#### With this project you can quickly run the following:
 
 - [wordpress (php-fpm)](https://hub.docker.com/_/wordpress)
 - [nginx](https://hub.docker.com/_/nginx)
@@ -19,7 +19,7 @@ With this project you can quickly run the following:
 - [varnish](https://hub.docker.com/_/varnish)
 - [backup](https://hub.docker.com/r/futurice/docker-volume-backup)
 
-For certbot (letsencrypt) certificate:
+#### For certbot (letsencrypt) certificate:
 
 - [Set DNS configuration of your domain name](https://support.google.com/a/answer/48090?hl=en)
 
@@ -31,7 +31,7 @@ Create rules to open ports to the internet, or to a specific IPv4 address or ran
 - portainer: 9001
 - phpmyadmin: 9090
 
-Contents:
+#### Contents:
 
 - [Auto Configuration and Installation](#automatic)
 - [Requirements](#requirements)
