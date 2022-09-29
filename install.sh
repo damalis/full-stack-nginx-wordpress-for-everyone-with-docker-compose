@@ -233,9 +233,9 @@ sed -i 's/local_timezone/'$local_timezone'/' .env
 if [ -x "$(command -v docker)" ] && [ -x "$(command -v docker-compose)" ]; then
     # Firstly: create external volume
 	docker volume create --driver local --opt type=none --opt device=`pwd`/certbot --opt o=bind certbot-etc > /dev/null
-	# installing wordpress and the other services
+	# installing WordPress and the other services
 	docker-compose up -d & export pid=$!
-	echo "wordpress and the other services installing proceeding..."
+	echo "WordPress and the other services installing proceeding..."
 	echo ""
 	wait $pid
 	if [ $? -eq 0 ]
@@ -277,7 +277,7 @@ if [ -x "$(command -v docker)" ] && [ -x "$(command -v docker-compose)" ]; then
 		fi
 	else
 		echo ""
-		echo "Error! could not installed wordpress and the other services with docker-compose" >&2
+		echo "Error! could not installed WordPress and the other services with docker-compose" >&2
 		exit 1
 	fi
 else
