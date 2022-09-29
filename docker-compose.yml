@@ -145,7 +145,7 @@ services:
     
     database:
         image: '${DATABASE_IMAGE_NAME}:${DATABASE_VERSION}'
-        container_name: '${DATABASE_CONT_NAME}'
+        container_name: database
         networks:
             - backend
         volumes:
@@ -240,7 +240,7 @@ networks:
 
 volumes:
     html:
-        name: wp-html
+        name: wordpress-html
         driver: local
         driver_opts:
             type: none
