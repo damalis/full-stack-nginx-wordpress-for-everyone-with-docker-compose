@@ -108,7 +108,7 @@ change example.com to your domain name in ```./phpmyadmin/apache2/sites-availabl
 
 Firstly: will create external volume
 ```
-docker volume create --driver local --opt type=none --opt device=/home/ubuntu/full-stack-nginx-wordpress-for-everyone-with-docker-compose/certbot --opt o=bind certbot-etc
+docker volume create --driver local --opt type=none --opt device=${DIRECTORY_PATH}/certbot --opt o=bind certbot-etc
 ```
 
 ```
@@ -272,9 +272,9 @@ This will back up the all files and folders, once per day, and write it to ./bac
 #### example for crontab file
 
 ##### # old docker backup folder remove
-50 23 * * * find /home/ubuntu/${DIRECTORY_PATH}/backups/backup* -type f -mtime +1 | xargs rm
+50 23 * * * find ${DIRECTORY_PATH}/backups/backup* -type f -mtime +1 | xargs rm
 
-##### # backup exclude wordpress, backups folders in /home/ubuntu/${DIRECTORY_PATH}
-00 01 * * * tar -czvf /home/ubuntu/${DIRECTORY_PATH}/backups/'backup-example.com-'$(date +"\%Y-\%m-\%dT\%H-\%M-\%S")'.tar.gz' --exclude='wordpress/wp-admin' --exclude='wordpress/wp-includes' --exclude='backups' /home/ubuntu/${DIRECTORY_PATH}
+##### # backup exclude wordpress, backups folders in ${DIRECTORY_PATH}
+00 01 * * * tar -czvf ${DIRECTORY_PATH}/backups/'backup-example.com-'$(date +"\%Y-\%m-\%dT\%H-\%M-\%S")'.tar.gz' --exclude='wordpress/wp-admin' --exclude='wordpress/wp-includes' --exclude='backups' ${DIRECTORY_PATH}
 
 [CronHowto](https://help.ubuntu.com/community/CronHowto)
