@@ -80,7 +80,7 @@ Open a terminal and `cd` to the folder in which `docker-compose.yml` is saved an
 cd full-stack-nginx-wordpress-for-everyone-with-docker-compose
 ```
 
-### Manual Configuration
+### Manual
 
 Copy the example environment into `.env`
 
@@ -104,7 +104,7 @@ change example.com to your domain name in ```./phpmyadmin/apache2/sites-availabl
 
 ## Installation
 
-### Manual Installation
+### Manual
 
 Firstly: will create external volume
 ```
