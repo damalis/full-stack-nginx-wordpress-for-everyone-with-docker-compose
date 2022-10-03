@@ -269,12 +269,18 @@ The first authorize screen(htpasswd;username or password) and phpmyadmin login s
 
 This will back up the all files and folders, once per day, and write it to ./backups with a filename like backup-2022-02-07T16-51-56.tar.gz
 
-#### example for crontab file
+#### example for crontab file on the host machine
 
 ##### # old docker backup folder remove
+
+```
 50 23 * * * find ${DIRECTORY_PATH}/backups/backup* -type f -mtime +1 | xargs rm
+```
 
 ##### # backup exclude wordpress, backups folders in ${DIRECTORY_PATH}
+
+```
 00 01 * * * tar -czvf ${DIRECTORY_PATH}/backups/'backup-example.com-'$(date +"\%Y-\%m-\%dT\%H-\%M-\%S")'.tar.gz' --exclude='wordpress/wp-admin' --exclude='wordpress/wp-includes' --exclude='backups' ${DIRECTORY_PATH}
+```
 
 [CronHowto](https://help.ubuntu.com/community/CronHowto)
