@@ -38,6 +38,7 @@ Create rules to open ports to the internet, or to a specific IPv4 address or ran
 - [Manual Configuration and Installation](#configuration)
 - [Portainer Installation](#portainer)
 - [Usage](#usage)
+	- [Website](#website)
 
 ## Automatic
 
