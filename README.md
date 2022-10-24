@@ -39,9 +39,9 @@ Create rules to open ports to the internet, or to a specific IPv4 address or ran
 - [Portainer Installation](#portainer)
 - [Usage](#usage)
 	- [Website](#website)
-	- [Website](#webserver)
+	- [Webserver](#webserver)
 	- [Redis Plugin](#redis-plugin)
-	- [Varnish Plugin](#varnish-lugin)
+	- [Varnish Plugin](#varnish-plugin)
 	- [phpMyAdmin](#phpmyadmin)
 	- [backup](#backup)
 
