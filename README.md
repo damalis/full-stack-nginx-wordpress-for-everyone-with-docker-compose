@@ -205,7 +205,7 @@ docker-compose up -d
 
 ### Website
 
-You should see the "Wordpress" page in your browser. If not, please check if your PHP installation satisfies WordPress's requirements.
+You should see the "Wordpress installation" page in your browser. If not, please check if your PHP installation satisfies WordPress's requirements.
 
 ```
 https://example.com
