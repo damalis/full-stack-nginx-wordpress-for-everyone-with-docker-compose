@@ -48,13 +48,13 @@ services:
         volumes:
             - 'html:${WEBSERVER_DOC_ROOT}'
             - type: bind
-              source: ./nginx/nginx.conf
+              source: ./webserver/nginx.conf
               target: '${NGINX_PREFIX}/nginx.conf'
             - type: bind
-              source: ./nginx/templates/nginx.conf.template
+              source: ./webserver/templates/nginx.conf.template
               target: '${NGINX_PREFIX}/templates/default.conf.template'
             - type: bind
-              source: ./nginx/ssl-option/options-ssl-nginx.conf
+              source: ./webserver/ssl-option/options-ssl-nginx.conf
               target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-nginx.conf'
             - type: bind
               source: ./ssl-conf.sh
