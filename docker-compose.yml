@@ -25,6 +25,12 @@ services:
             - database
             - redis
             - varnish
+        healthcheck:
+            test: ["CMD-SHELL", "curl -fk https://${DOMAIN_NAME} || exit 1"]
+            interval: 10s
+            timeout: 5s
+            retries: 4
+            start_period: 30s
         environment:
             WORDPRESS_DB_HOST: 'database'
             WORDPRESS_DB_USER: '${WORDPRESS_DB_USER}'
