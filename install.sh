@@ -2,12 +2,12 @@
 
 clear
 echo ""
-echo "================================================================="
-echo "|                                                               |"
-echo "|  full-stack-nginx-wordpress-for-everyone-with-docker-compose  |"
-echo "|                     by Erdal ALTIN                            |"
-echo "|                                                               |"
-echo "================================================================="
+echo "====================================================================="
+echo "|                                                                   |"
+echo "|    full-stack-nginx-wordpress-for-everyone-with-docker-compose    |"
+echo "|                     by Erdal ALTIN                                |"
+echo "|                                                                   |"
+echo "====================================================================="
 sleep 2
 
 # Uninstall old versions
@@ -263,8 +263,8 @@ if [ -x "$(command -v docker)" ] && [ -x "$(command -v docker-compose)" ]; then
 				if [ ! -z `docker ps -q -f "status=running" --no-trunc | grep $(docker-compose ps -q webserver)` ]; then break; fi
 			done			
 			echo ""
-			echo "Reloading Webserver Nginx ssl configuration"
-			docker exec webserver nginx -s reload > /dev/null 2>&1
+			echo "Reloading webserver ssl configuration"
+			docker container restart webserver > /dev/null 2>&1
 			echo "Ok."
 			echo ""
 			echo "completed setup"
