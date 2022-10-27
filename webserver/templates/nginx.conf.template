@@ -67,13 +67,9 @@ server {
 		proxy_request_buffering	off;
 		#
 		# Mitigate httpoxy attack
-		proxy_set_header Proxy "";        
-	}	
-	#
-	# deny running scripts inside writable directories
-	location ~* /(uploads|cache|media|logs|tmp|languages)/.*\.(php|pl|py|jsp|asp|sh|cgi)$ {
-		return 403;
-		error_page 403 /403_error.html;
+		proxy_set_header Proxy "";
+
+		rewrite ^([^.]*[^/])$ $1/ permanent;        
 	}
 	#
 	# deny access to .htaccess vb. files, if Apache's document root
@@ -82,10 +78,10 @@ server {
 		log_not_found off;
 	}
 	#
-	location ~*  \.(svg|svgz)$ {
-		types {}
-		default_type image/svg+xml;
+	location ~ /.well-known {
+		allow all;
 	}
+	#
 	location = /favicon.ico {
 		log_not_found off;
 		access_log off;
