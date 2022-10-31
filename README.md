@@ -216,11 +216,7 @@ add or remove code in the ./php-fpm/php/conf.d/security.ini file for custom php.
 
 [https://www.php.net/manual/en/configuration.file.php](https://www.php.net/manual/en/configuration.file.php)
 
-Copy and paste the following code in the ./php-fpm/php-fpm.d/z-www.conf file for php-fpm configurations at 1Gb Ram Host
-
-Or you should make changes custom host configurations then must restart service
-
-FPM uses php.ini syntax for its configuration file - php-fpm.conf, and pool configuration files.
+You should make changes custom host configurations ```./php-fpm/php-fpm.d/z-www.conf``` then must restart service, FPM uses php.ini syntax for its configuration file - php-fpm.conf, and pool configuration files.
 
 [https://www.php.net/manual/en/install.fpm.configuration.php](https://www.php.net/manual/en/install.fpm.configuration.php)
 
