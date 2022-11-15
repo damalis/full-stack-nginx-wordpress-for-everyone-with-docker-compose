@@ -62,7 +62,7 @@ echo "Done ✓"
 echo "============================================"
 
 ##########
-# Install Docker-Compose
+# Install Docker Compose
 ##########
 echo ""
 echo ""
@@ -230,11 +230,11 @@ sed -i 's/pma_password/'$pma_password'/' .env
 sed -i "s@directory_path@$(pwd)@" .env
 sed -i 's/local_timezone/'$local_timezone'/' .env
 
-if [ -x "$(command -v docker)" ] && [ -x "$(command -v docker-compose)" ]; then
+if [ -x "$(command -v docker)" ] && [ "$(docker compose version)" ]; then
     # Firstly: create external volume
 	docker volume create --driver local --opt type=none --opt device=`pwd`/certbot --opt o=bind certbot-etc > /dev/null
 	# installing WordPress and the other services
-	docker-compose up -d & export pid=$!
+	docker compose up -d & export pid=$!
 	echo "WordPress and the other services installing proceeding..."
 	echo ""
 	wait $pid
@@ -242,7 +242,7 @@ if [ -x "$(command -v docker)" ] && [ -x "$(command -v docker-compose)" ]; then
 	then
 		# installing portainer
 		docker volume create portainer_data > /dev/null
-		docker-compose -f portainer-docker-compose.yml -p portainer up -d & export pid=$!
+		docker compose -f portainer-docker-compose.yml -p portainer up -d & export pid=$!
 		echo ""
 		echo "portainer installing proceeding..."
 		wait $pid
@@ -257,10 +257,10 @@ if [ -x "$(command -v docker)" ] && [ -x "$(command -v docker-compose)" ]; then
 				if sudo [ -d "./certbot/live/$domain_name" ]; then break; fi
 			done
 			echo "Ok."
-			until [ ! -z `docker ps -q -f "status=running" --no-trunc | grep $(docker-compose ps -q webserver)` ]; do
+			until [ ! -z `docker ps -q -f "status=running" --no-trunc | grep $(docker compose ps -q webserver)` ]; do
 				echo "waiting starting webserver container"
 				sleep 2s & wait ${!}
-				if [ ! -z `docker ps -q -f "status=running" --no-trunc | grep $(docker-compose ps -q webserver)` ]; then break; fi
+				if [ ! -z `docker ps -q -f "status=running" --no-trunc | grep $(docker compose ps -q webserver)` ]; then break; fi
 			done			
 			echo ""
 			echo "Reloading webserver ssl configuration"
@@ -277,11 +277,11 @@ if [ -x "$(command -v docker)" ] && [ -x "$(command -v docker-compose)" ]; then
 		fi
 	else
 		echo ""
-		echo "Error! could not installed WordPress and the other services with docker-compose" >&2
+		echo "Error! could not installed WordPress and the other services with docker compose" >&2
 		exit 1
 	fi
 else
 	echo ""
-    echo "not found docker and/or docker-compose, Install docker and/or docker-compose" >&2
+    echo "not found docker and/or docker compose, Install docker and/or docker compose" >&2
 	exit 1
 fi
