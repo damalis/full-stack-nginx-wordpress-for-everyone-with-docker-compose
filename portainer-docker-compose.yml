@@ -20,5 +20,4 @@ volumes:
     portainer_data:
         name: portainer_data
     certbot-etc:
-        external:
-            name: certbot-etc
+        external: true
