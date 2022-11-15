@@ -67,7 +67,7 @@ echo "============================================"
 echo ""
 echo ""
 echo "============================================"
-echo "| Installing Docker Compose v1.29.2..."
+echo "| Installing Docker Compose v2.12.2..."
 echo "============================================"
 echo ""
 sleep 2
