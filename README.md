@@ -190,6 +190,11 @@ to remove external certbot-etc and portainer and the other volumes
 docker volume rm $(docker volume ls -q)
 ```
 
+to remove portainer and the other images
+```
+docker rmi $(docker image ls -q)
+```
+
 ### Project from existing source
 
 Copy all files into a new directory:
