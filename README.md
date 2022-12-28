@@ -135,7 +135,7 @@ For convenience you may add a new entry into your hosts file.
 docker volume create portainer_data
 docker compose -f portainer-docker-compose.yml -p portainer up -d 
 ```
-manage docker with [Portainer](https://www.portainer.io/solutions/docker) is the definitive container management tool for Docker, Docker Swarm with it's highly intuitive GUI and API. 
+manage docker with [Portainer](https://www.portainer.io/) is the definitive container management tool for Docker, Docker Swarm with it's highly intuitive GUI and API. 
 
 You can also visit `https://example.com:9001` to access portainer after starting the containers.
 
