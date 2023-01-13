@@ -107,10 +107,6 @@ server {
 		log_not_found off;
 	}
 	#
-	location ~ /.well-known {
-		allow all;
-	}
-	#
 	location = /favicon.ico {
 		log_not_found off;
 		access_log off;

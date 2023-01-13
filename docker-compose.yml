@@ -101,6 +101,7 @@ services:
             - backend
             - frontend
         volumes:
+            - 'phpmyadmin:${WEBSERVER_DOC_ROOT}/sql'
             - type: bind
               source: ./phpmyadmin/apache2/sites-available/default-ssl.conf
               target: '${APACHE_CONFDIR_PREFIX}/sites-available/default-ssl.conf'            
@@ -121,10 +122,10 @@ services:
         restart: unless-stopped
         ports:
             - '9090:443'
-        #links:
-        #    - database
+        links:
+            - database
         environment:
-            #PMA_HOST: database
+            PMA_HOST: 'database'
             PMA_PMADB: 'phpmyadmin'
             PMA_CONTROLUSER: '${PMA_CONTROLUSER}'
             PMA_CONTROLPASS: '${PMA_CONTROLPASS}'
@@ -133,7 +134,7 @@ services:
             MEMORY_LIMIT: '${PMA_MEMORY_LIMIT}'
             TZ: '${LOCAL_TIMEZONE}'
         command: >
-            bash -c "echo ${PMA_HTPASSWD_USERNAME}:phpmyadmin:$$( printf \"%s:%s:%s\" \"${PMA_HTPASSWD_USERNAME}\" \"phpmyadmin\" \"${PMA_HTPASSWD_PASSWORD}\" | md5sum | awk '{print $$1}' ) > ${PMA_CONF_FOLDER}/.htpasswd 
+            bash -c "apt-get -y update && apt-get install -y gettext-base && envsubst < ${WEBSERVER_DOC_ROOT}/sql/create_tables.sql.template > ${WEBSERVER_DOC_ROOT}/sql/create_tables.sql && echo ${PMA_HTPASSWD_USERNAME}:phpmyadmin:$$( printf \"%s:%s:%s\" \"${PMA_HTPASSWD_USERNAME}\" \"phpmyadmin\" \"${PMA_HTPASSWD_PASSWORD}\" | md5sum | awk '{print $$1}' ) > ${PMA_CONF_FOLDER}/.htpasswd 
             && printf 'AuthType Digest\\nAuthName \"phpmyadmin\"\\nAuthDigestProvider file\\nAuthUserFile ${PMA_CONF_FOLDER}/.htpasswd\\nRequire valid-user\\n' > ${WEBSERVER_DOC_ROOT}/.htaccess && a2enmod auth_digest; 
             mkdir -p ${WEBSERVER_DOC_ROOT}/../upload && chown www-data:www-data ${WEBSERVER_DOC_ROOT}/../upload && chmod a+w ${WEBSERVER_DOC_ROOT}/../upload; mkdir -p ${WEBSERVER_DOC_ROOT}/../save && chown www-data:www-data ${WEBSERVER_DOC_ROOT}/../save && chmod a+w ${WEBSERVER_DOC_ROOT}/../save;
             grep -qxF 'ServerName 127.0.0.1' ${APACHE_CONFDIR_PREFIX}/apache2.conf || echo -e '\\nServerName 127.0.0.1' >> ${APACHE_CONFDIR_PREFIX}/apache2.conf; grep -qe 'date.timezone = ${LOCAL_TIMEZONE}' ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini || echo 'date.timezone = ${LOCAL_TIMEZONE}' >> ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini; 
@@ -146,9 +147,11 @@ services:
             - backend
         volumes:
             - 'db:/var/lib/mysql'
+            - 'db-backup-data:/tmp/backup'
             - type: bind
               source: ./database/conf.d/z-mysql.cnf
               target: '${MYSQL_CONF_PREFIX}/z-mysql.cnf'
+            - 'phpmyadmin:/docker-entrypoint-initdb.d'
         hostname: database
         restart: unless-stopped
         ports:
@@ -163,6 +166,8 @@ services:
             TZ: '${LOCAL_TIMEZONE}'
         labels:            
             - "docker-volume-backup.stop-during-backup=true"
+            - "docker-volume-backup.archive-pre=/bin/sh -c 'mysqldump -uroot -p${MYSQL_ROOT_PASSWORD} --all-databases > /tmp/backup/db_backup_data.sql'"
+            - "docker-volume-backup.exec-label=database"
         command: "--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password"
     
     redis:
@@ -207,24 +212,26 @@ services:
         command: "-a http=:8080,HTTP -p default_ttl=3600"
     
     backup:
-        image: 'futurice/docker-volume-backup'
+        image: offen/docker-volume-backup:latest
         container_name: backup
         networks:
             - backend
         volumes:
-            - '/var/run/docker.sock:/var/run/docker.sock:ro'
             - 'html:/backup/html:ro'
             - 'db:/backup/db:ro'
+            - 'db-backup-data:/backup/db-backup-data:ro'
+            - '/var/run/docker.sock:/var/run/docker.sock:ro'
             - type: bind
               source: ./backups
               target: /archive
         hostname: backup
         restart: unless-stopped
         environment:
-            BACKUP_WAIT_SECONDS: 120
             BACKUP_CRON_EXPRESSION: '20 01 * * *'
             BACKUP_FILENAME: 'backup-%Y-%m-%dT%H-%M-%S.tar.gz'
-            TZ: '${LOCAL_TIMEZONE}'    
+            BACKUP_RETENTION_DAYS: '7'
+            EXEC_LABEL: 'database'
+            #BACKUP_EXCLUDE_REGEXP: 'folder|folder|file|\\.log$$'    
 
 networks:
     backend: null
@@ -240,6 +247,15 @@ volumes:
             o: bind
     db:
         name: ${DATABASE_CONT_NAME}-data
+    db-backup-data:
+        name: ${DATABASE_CONT_NAME}-backup-data
+    phpmyadmin:
+        name: phpmyadmin-sql
+        driver: local
+        driver_opts:
+            type: none
+            device: ${DIRECTORY_PATH}/phpmyadmin/sql
+            o: bind
     dtredis:
         name: redis-data
     certbot-etc:
