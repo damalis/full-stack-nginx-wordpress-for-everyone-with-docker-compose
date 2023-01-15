@@ -242,7 +242,6 @@ if [ -x "$(command -v docker)" ] && [ "$(docker compose version)" ]; then
 	if [ $? -eq 0 ]
 	then
 		# installing portainer
-		docker volume create portainer_data > /dev/null
 		docker compose -f portainer-docker-compose.yml -p portainer up -d & export pid=$!
 		echo ""
 		echo "portainer installing proceeding..."
