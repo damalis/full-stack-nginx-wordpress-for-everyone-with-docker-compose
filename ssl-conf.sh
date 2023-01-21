@@ -12,7 +12,7 @@ fi
 
 use_lets_encrypt_certificates() {
 	echo "switching webserver to use Let's Encrypt certificate for $1"
-	sed '/#location.\/./,/#}/ s/#//; s/#listen/listen/g; s/#ssl_/ssl_/g' $3/conf.d/default.conf > $3/conf.d/default.conf.bak	
+	sed '/#location.\/./,/#}/ s/#//; s/#listen/listen/g; s/#ssl_/ssl_/g' $3/conf.d/default.conf > $3/conf.d/default.conf.bak
 }
 
 reload_webserver() {
@@ -36,13 +36,11 @@ wait_for_lets_encrypt() {
 	reload_webserver "$3"
 }
 
-for domain in $1; do
-	if [ ! -d "$2/live/$1" ]; then
-		wait_for_lets_encrypt "$domain" "$2" "$3" &
-	else
-		use_lets_encrypt_certificates "$domain" "$2" "$3"
-		reload_webserver "$3"
-	fi
-done
+if [ ! -d "$2/live/$1" ]; then
+	wait_for_lets_encrypt "$1" "$2" "$3" &
+else
+	use_lets_encrypt_certificates "$1" "$2" "$3"
+	reload_webserver "$3"
+fi
 
 nginx -g 'daemon off;'

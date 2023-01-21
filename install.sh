@@ -30,7 +30,7 @@ sudo apt-get update
 Installed=`sudo apt-cache policy docker-ce | sed -n '2p' | cut -c 14-`
 Candidate=`sudo apt-cache policy docker-ce | sed -n '3p' | cut -c 14-`
 
-if [[ "$Installed" != "$Candidate" ]]; then 
+if [[ "$Installed" != "$Candidate" ]]; then
 	sudo apt-get install docker-ce docker-ce-cli containerd.io
 elif [[ "$Installed" == "$Candidate" ]]; then
 	echo ""
@@ -257,11 +257,11 @@ if [ -x "$(command -v docker)" ] && [ "$(docker compose version)" ]; then
 				if sudo [ -d "./certbot/live/$domain_name" ]; then break; fi
 			done
 			echo "Ok."
-			until [ ! -z `docker ps -q -f "status=running" --no-trunc | grep $(docker compose ps -q webserver)` ]; do
-				echo "waiting starting webserver container"
-				sleep 2s & wait ${!}
-				if [ ! -z `docker ps -q -f "status=running" --no-trunc | grep $(docker compose ps -q webserver)` ]; then break; fi
-			done			
+			#until [ ! -z `docker compose ps -a --filter "status=running" --services | grep webserver` ]; do
+			#	echo "waiting starting webserver container"
+			#	sleep 2s & wait ${!}
+			#	if [ ! -z `docker compose ps -a --filter "status=running" --services | grep webserver` ]; then break; fi
+			#done
 			echo ""
 			echo "Reloading webserver ssl configuration"
 			docker container restart webserver > /dev/null 2>&1
