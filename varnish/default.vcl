@@ -5,6 +5,7 @@ import std;
 backend default {
     .host = "webserver";
     .port = "90";
+    .connect_timeout = 2s;
 }
 
 # Add hostnames, IP addresses and subnets that are allowed to purge content
