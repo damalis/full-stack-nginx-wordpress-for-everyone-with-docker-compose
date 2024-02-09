@@ -84,12 +84,8 @@ server {
 	index	index.php;
 	
 	location / {
-		try_files $uri /index.php$is_args$args;
+		try_files $uri $uri/ /index.php$is_args$args;
 	}
-	
-	location /wp-admin {
-		try_files $uri /wp-admin/index.php$is_args$args;
-	}	
 	
 	location ~ \.php$ {
 		#NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
