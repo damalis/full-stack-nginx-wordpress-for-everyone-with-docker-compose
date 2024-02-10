@@ -126,11 +126,11 @@ Edit the `.env` file to change values of ```LOCAL_TIMEZONE```, ```DOMAIN_NAME```
 LOCAL_TIMEZONE=[to see local timezones](https://docs.diladele.com/docker/timezones.html)
 
 DIRECTORY_PATH=```pwd``` at command line\
-DATABASE_IMAGE_NAME=```mariadb``` or ```mysql```
-DATABASE_CONT_NAME=```mariadb```, ```mysql``` or ```custom name```
-DATABASE_PACKAGE_MANAGER=```apt-get -y update && apt-get install -y gettext-base``` for mariadb, ```microdnf install -y gettext``` for mysql
-DATABASE_AUTHENTICATION_PLUGIN=```mysql_native_password``` for mariadb, ```caching_sha2_password``` for mysql
-DATABASE_ADMIN_COMMANDLINE=```mariadb-admin``` for mariadb, ```mysqladmin``` for mysql
+DATABASE_IMAGE_NAME=```mariadb``` or ```mysql```\
+DATABASE_CONT_NAME=```mariadb```, ```mysql``` or ```custom name```\
+DATABASE_PACKAGE_MANAGER=```apt-get -y update && apt-get install -y gettext-base``` for mariadb, ```microdnf install -y gettext``` for mysql\
+DATABASE_AUTHENTICATION_PLUGIN=```mysql_native_password``` for mariadb, ```caching_sha2_password``` for mysql\
+DATABASE_ADMIN_COMMANDLINE=```mariadb-admin``` for mariadb, ```mysqladmin``` for mysql\
 
 and
 
