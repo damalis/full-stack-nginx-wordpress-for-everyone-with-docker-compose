@@ -41,7 +41,7 @@ Plus, manage docker containers with Portainer.
 - [webserver (nginx)](https://hub.docker.com/_/nginx)
 - [certbot (letsencrypt)](https://hub.docker.com/r/certbot/certbot)
 - [phpMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/)
-- [databaseMariadb](https://hub.docker.com/_/mariadb)[databaseMysql](https://hub.docker.com/_/mysql)
+- [databaseMariadb](https://hub.docker.com/_/mariadb) [databaseMysql](https://hub.docker.com/_/mysql)
 - [redis](https://hub.docker.com/_/redis)
 - [varnish](https://hub.docker.com/_/varnish)
 - [backup](https://hub.docker.com/r/offen/docker-volume-backup)
