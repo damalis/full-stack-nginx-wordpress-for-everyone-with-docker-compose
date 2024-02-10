@@ -201,29 +201,36 @@ docker compose stop
 ### Removing containers
 
 To stop and remove all the containers use the `down` command:
-
 ```
 docker compose down
 ```
 
-to remove portainer and the other containers
+to remove portainer and the other containers:
 ```
 docker rm -f $(docker ps -a -q)
 ```
 
 Use `-v` if you need to remove the database volume which is used to persist the database:
-
 ```
 docker compose down -v
 ```
 
-to remove external certbot-etc and portainer and the other volumes
-
+to remove external certbot-etc and portainer and the other volumes:
 ```
 docker volume rm $(docker volume ls -q)
 ```
 
-to remove portainer and the other images
+Delete all images, containers, volumes, and networks that are not associated with a container (dangling):
+```
+docker system prune
+```
+
+To additionally remove any stopped containers and all unused images (not just dangling ones), add the -a flag to the command:
+```
+docker system prune -a
+```
+
+to remove portainer and the other images:
 ```
 docker rmi $(docker image ls -q)
 ```
