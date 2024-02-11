@@ -13,7 +13,8 @@ If You want to build a website with WordPress at short time;
 <a href="https://www.varnish-software.com/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/577014?s=200&v=4" alt="varnish" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="#" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/bash/bash.png" alt="Bash" height="50" width="50" /> </a>&nbsp;&nbsp;&nbsp;
 <a href="https://www.phpmyadmin.net/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/1351977?s=200&v=4" alt="phpmyadmin" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
-<a href="https://letsencrypt.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/17889013?s=200&v=4" alt="letsencrypt" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
+<a href="https://certbot.eff.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/17889013?s=200&v=4" alt="certbot" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
+<a href="https://letsencrypt.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/9289019?s=200&v=4" alt="letsencrypt" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://www.portainer.io/?hsLang=en" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/22225832?s=200&v=4" alt="portainer" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://www.offen.dev/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/47735043?s=200&v=4" alt="backup" height="35" width="35"/> </a> </p>
 
@@ -103,7 +104,7 @@ Clone this repository or copy the files from this repository into a new folder.
 Make sure to [add your user to the `docker` group](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
 
 ## Manual
-		 
+ 
 ### Configuration
 
 download with
@@ -133,6 +134,7 @@ DATABASE_CONT_NAME=```mariadb```, ```mysql``` or ```custom name```\
 DATABASE_PACKAGE_MANAGER=```apt-get -y update && apt-get install -y gettext-base``` for mariadb, ```microdnf install -y gettext``` for mysql\
 DATABASE_AUTHENTICATION_PLUGIN=```mysql_native_password``` for mariadb, ```caching_sha2_password``` for mysql\
 DATABASE_ADMIN_COMMANDLINE=```mariadb-admin``` for mariadb, ```mysqladmin``` for mysql\
+VARNISH_VERSION=```latest``` for centos version 9+ and fedora, ```stable``` for the others\
 
 and
 
@@ -179,7 +181,6 @@ You can also visit `https://example.com:9001` to access portainer after starting
 ### Show both running and stopped containers
 
 The docker ps command only shows running containers by default. To see all containers, use the -a (or --all) flag:
-
 ```
 docker ps -a
 ```
@@ -187,7 +188,6 @@ docker ps -a
 ### Starting containers
 
 You can start the containers with the `up` command in daemon mode (by adding `-d` as an argument) or by using the `start` command:
-
 ```
 docker compose start
 ```
@@ -321,7 +321,6 @@ define('FORCE_SSL_ADMIN', true);
 ```
 
 after every change in the wordpress and the varnish configuration or if You get error "502 Bad Gateway":
-
 ```
 docker container restart varnish
 ```
