@@ -134,7 +134,7 @@ DATABASE_CONT_NAME=```mariadb```, ```mysql``` or ```custom name```\
 DATABASE_PACKAGE_MANAGER=```apt-get -y update && apt-get install -y gettext-base``` for mariadb, ```microdnf install -y gettext``` for mysql\
 DATABASE_AUTHENTICATION_PLUGIN=```mysql_native_password``` for mariadb, ```caching_sha2_password``` for mysql\
 DATABASE_ADMIN_COMMANDLINE=```mariadb-admin``` for mariadb, ```mysqladmin``` for mysql\
-VARNISH_VERSION=```latest``` for centos version 9+ and fedora, ```stable``` for the others\
+VARNISH_VERSION=```latest``` for centos version 9+ and fedora, ```stable``` for the others
 
 and
 
