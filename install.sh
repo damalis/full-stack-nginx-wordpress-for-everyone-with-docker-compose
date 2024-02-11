@@ -79,7 +79,7 @@ then
 	sudo yum remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine podman runc
 elif [ "$lpms" == "apt" ]
 then
-	for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt remove $pkg; done
+	for pkg in docker docker-engine docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt remove $pkg; done
 elif [ "$lpms" == "zypper" ]
 then
 	if [[ $(grep -Pow 'ID=\K[^;]*' /etc/os-release | tr -d '"') == *"sles"* ]]
@@ -417,18 +417,17 @@ case "$choice" in
 esac
 
 cp ./phpmyadmin/apache2/sites-available/default-ssl.sample.conf ./phpmyadmin/apache2/sites-available/default-ssl.conf
-sed -i 's/example.com/'$domain_name'/g' ./phpmyadmin/apache2/sites-available/default-ssl.conf
-
-cp env.example .env
 cp ./database/phpmyadmin/sql/create_tables.sql.template.example ./database/phpmyadmin/sql/create_tables.sql.template
 
-sed -i 's/pma_controluser/'$pma_username'/g' ./database/phpmyadmin/sql/create_tables.sql.template
+cp env.example .env
+
 sed -i 's/db_authentication_plugin/'$db_authentication_plugin'/' ./database/phpmyadmin/sql/create_tables.sql.template
 sed -i "s/db_authentication_password/${db_authentication_password}/" ./database/phpmyadmin/sql/create_tables.sql.template
 sed -i 's/db_authentication_plugin/'$db_authentication_plugin'/' .env
 sed -i "s|db_package_manager|${db_package_manager}|" .env
 sed -i 's/db_admin_commandline/'$db_admin_commandline'/' .env
 sed -i 's/example.com/'$domain_name'/' .env
+sed -i 's/example.com/'$domain_name'/g' ./phpmyadmin/apache2/sites-available/default-ssl.conf
 sed -i 's/email@domain.com/'$email'/' .env
 sed -i 's/which_db/'$which_db'/g' .env
 sed -i 's/db_username/'$db_username'/g' .env
@@ -438,6 +437,7 @@ sed -i 's/db_table_prefix/'$db_table_prefix'/' .env
 sed -i 's/mysql_root_password/'$mysql_root_password'/' .env
 sed -i 's/pma_username/'$pma_username'/' .env
 sed -i 's/pma_password/'$pma_password'/' .env
+sed -i 's/pma_controluser/'$pma_username'/g' ./database/phpmyadmin/sql/create_tables.sql.template
 sed -i "s@directory_path@$(pwd)@" .env
 sed -i 's/local_timezone/'$local_timezone'/' .env
 sed -i 's/varnish_version/'$varnish_version'/' .env
