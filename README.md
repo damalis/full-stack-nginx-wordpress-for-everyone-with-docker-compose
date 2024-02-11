@@ -104,7 +104,7 @@ Clone this repository or copy the files from this repository into a new folder.
 Make sure to [add your user to the `docker` group](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
 
 ## Manual
- 
+
 ### Configuration
 
 download with
