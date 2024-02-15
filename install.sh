@@ -18,6 +18,7 @@ do
 		if [ "$i" == "apk" ]
 		then
 			lpms=$i
+			sudo apk add --no-cache --upgrade grep
 			break
 		elif [ "$i" == "dnf" ] && ([[ $(grep -Pow 'ID=\K[^;]*' /etc/os-release | tr -d '"') == "fedora" ]] || (([[ $(grep -Pow 'ID=\K[^;]*' /etc/os-release | tr -d '"') != "centos" ]] && [[ $(grep -Pow 'ID_LIKE=\K[^;]*' /etc/os-release | tr -d '"') == *"fedora"* ]]) || ([[ $(grep -Pow 'ID_LIKE=\K[^;]*' /etc/os-release | tr -d '"') == *"rhel"* ]] && [ $(sudo uname -m) == "s390x" ])))
 		then
