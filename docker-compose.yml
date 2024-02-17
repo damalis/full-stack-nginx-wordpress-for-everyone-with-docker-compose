@@ -170,7 +170,7 @@ services:
             test: ["CMD-SHELL", "${DATABASE_ADMIN_COMMANDLINE} ping --silent || exit 1"]
             interval: 5s
             timeout: 5s
-            retries: 20
+            retries: 50
         environment:
             MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
             MYSQL_DATABASE: '${WORDPRESS_DB_NAME}'
