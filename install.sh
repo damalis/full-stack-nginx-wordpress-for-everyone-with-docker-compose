@@ -166,7 +166,7 @@ then
 	sudo apt update
 	sudo apt install ca-certificates curl gnupg lsb-release
 	sudo mkdir -m 0755 /etc/apt/keyrings
-	curl -fsSL https://download.docker.com/linux/$(grep -Pow 'ID=\K[^;]*' /etc/os-release | tr -d '"')/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+	sudo curl -fsSL https://download.docker.com/linux/$(grep -Pow 'ID=\K[^;]*' /etc/os-release | tr -d '"')/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 	sudo chmod a+r /etc/apt/keyrings/docker.gpg
 	# Add the repository to Apt sources:
 	echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/$(grep -Pow 'ID=\K[^;]*' /etc/os-release | tr -d '"') $(grep -Po 'VERSION_CODENAME=\K[^;]*' /etc/os-release) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
