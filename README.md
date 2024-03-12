@@ -109,6 +109,7 @@ Make sure to [add your user to the `docker` group](https://docs.docker.com/insta
 ### Configuration
 
 download with
+
 ```
 git clone https://github.com/damalis/full-stack-nginx-wordpress-for-everyone-with-docker-compose.git
 ```
