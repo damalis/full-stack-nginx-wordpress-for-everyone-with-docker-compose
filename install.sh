@@ -231,13 +231,13 @@ echo "======================================================================="
 echo ""
 echo ""
 echo "======================================================================="
-echo "| Installing Docker Compose v2.23.3..."
+echo "| Installing Docker Compose v2.27.2..."
 echo "======================================================================="
 echo ""
 sleep 2
 
 sudo mkdir -p /usr/local/lib/docker/cli-plugins
-sudo curl -SL "https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/lib/docker/cli-plugins/docker-compose
+sudo curl -SL "https://github.com/docker/compose/releases/download/v2.27.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/lib/docker/cli-plugins/docker-compose
 sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
 
 echo ""
@@ -261,6 +261,7 @@ echo ""
 echo "Done ✓"
 echo "======================================================================="
 
+clear
 ##########
 # Setup project variables
 ##########
