@@ -1,8 +1,6 @@
-version: '3.7'
- 
 services:
     portainer:
-        image: portainer/portainer-ce
+        image: portainer/portainer-ce:latest
         container_name: portainer
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
@@ -15,7 +13,7 @@ services:
         environment:
             TZ: '${LOCAL_TIMEZONE}'
         command: '--sslcert /etc/letsencrypt/live/${DOMAIN_NAME}/fullchain.pem --sslkey /etc/letsencrypt/live/${DOMAIN_NAME}/privkey.pem'
-    
+
 volumes:
     portainer_data:
         name: portainer_data
