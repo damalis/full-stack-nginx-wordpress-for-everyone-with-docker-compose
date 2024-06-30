@@ -26,7 +26,7 @@ USE phpmyadmin;
 --
 -- CREATE USER IF NOT EXISTS for phpmyadmin database
 --
-CREATE USER IF NOT EXISTS 'pma_controluser'@'%' IDENTIFIED WITH db_authentication_password;
+CREATE USER IF NOT EXISTS 'pma_controluser'@'%' IDENTIFIED BY db_authentication_password;
 
 --
 -- Privileges
