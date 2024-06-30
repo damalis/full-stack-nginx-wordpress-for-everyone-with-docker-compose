@@ -374,7 +374,7 @@ done
 echo "Ok."
 
 which_db=""
-db_authentication_password="USING PASSWORD('"$pma_password"')"
+db_authentication_password=$pma_password
 db_package_manager="apt-get update \&\& apt-get install -y gettext-base"
 db_admin_commandline="mariadb-admin"
 PS3="Select the database: "
@@ -383,7 +383,6 @@ do
 	which_db=$db
 	if [ $REPLY -eq 2 ]
 	then
-		db_authentication_password="BY '"$pma_password"'"
 		db_package_manager="microdnf install -y gettext"
 		db_admin_commandline="mysqladmin"
 	fi
