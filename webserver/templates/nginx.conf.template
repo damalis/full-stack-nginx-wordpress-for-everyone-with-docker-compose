@@ -28,8 +28,8 @@ server {
 }
 
 server {
-	#listen 443 ssl http2;
-	#listen [::]:443 ipv6only=on ssl http2;
+	#listen 443 ssl;
+	#listen [::]:443 ipv6only=on ssl;
 	#
 	server_name ${NGINX_HOST} www.${NGINX_HOST};
 	#
