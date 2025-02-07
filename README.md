@@ -61,6 +61,14 @@ Create rules to open ports to the internet, or to a specific IPv4 address or ran
 - portainer: 9001
 - phpmyadmin: 9090
 
+#### Note
+
+To optimize upload images, look at [the damalis repository](https://github.com/damalis/full-stack-nodejs-image-optimizer-for-everyone-with-damalis-repository)
+
+#### Required Ram
+
+require up to 2 GB of RAM for **Docker** and **Docker Compose**.
+
 #### Contents:
 
 - [Auto Configuration and Installation](#automatic)
@@ -249,6 +257,14 @@ to remove portainer and the other images:
 
 ```
 docker rmi $(docker image ls -q)
+```
+
+### Logs containers
+
+To fetch the logs of a container.
+
+```
+docker container logs container_name_or_id
 ```
 
 ### Project from existing source
