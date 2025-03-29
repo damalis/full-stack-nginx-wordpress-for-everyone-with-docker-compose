@@ -97,8 +97,7 @@ services:
             retries: 20
         environment:
             TZ: '${LOCAL_TIMEZONE}'
-        entrypoint: /bin/sh -c "certbot certonly --webroot --webroot-path /tmp/acme-challenge --rsa-key-size 4096 --non-interactive --agree-tos --no-eff-email --force-renewal --email ${LETSENCRYPT_EMAIL} -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}; 
-            trap exit TERM; while :; do certbot renew --dry-run; sleep 12h & wait $${!}; done;"
+        entrypoint: /bin/sh -c "${SSL_SNIPPET}; trap exit TERM; while :; do certbot renew --dry-run; sleep 12h & wait $${!}; done;"
 
     phpmyadmin:
         depends_on:

@@ -12,7 +12,7 @@ sleep 2
 
 # the "lpms" is an abbreviation of Linux Package Management System
 lpms=""
-for i in apk dnf yum apt zypper
+for i in apk dnf yum apt zypper pacman
 do
 	if [ -x "$(command -v $i)" ]; then
 		if [ "$i" == "apk" ]
@@ -33,6 +33,10 @@ do
 			lpms=$i
 			break
 		elif [[ $(grep -Pow 'ID_LIKE=\K[^;]*' /etc/os-release) == *"suse"* ]]
+		then
+			lpms=$i
+			break
+		elif [ "$i" == "pacman" ]
 		then
 			lpms=$i
 			break
@@ -87,6 +91,9 @@ then
 	then
 		sudo zypper remove docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate docker-logrotate docker-engine runc
 	fi
+elif [ "$lpms" == "pacman" ]
+then
+	sudo pacman -Rssn podman-docker podman-compose
 else
 	echo ""
 	echo "could not be detected package management system"
@@ -175,6 +182,10 @@ then
 
 	#Installed=`sudo apt-cache policy docker-ce | sed -n '2p' | cut -c 14-`
 	#Candidate=`sudo apt-cache policy docker-ce | sed -n '3p' | cut -c 14-`
+elif [ "$lpms" == "pacman" ]
+then
+	sudo pacman -Syu --noconfirm
+	sudo pacman -Ss docker docker-buildx
 else
 	echo ""
 	echo "could not be detected package management system"
@@ -266,26 +277,96 @@ clear
 # Setup project variables
 ##########
 echo ""
-echo ""
 echo "======================================================================="
 echo "| Please enter project related variables..."
 echo "======================================================================="
 echo ""
 sleep 2
 
+# set the host
+which_h=""
+items=("localhost" "remotehost")
+PS3="which computer command line are you on? Select the host: "
+select h in "${items[@]}"
+do
+	case $REPLY in
+		1)
+			which_h=$h
+			break;;
+		2)
+			which_h=$h
+			break;;
+		*)
+			echo "Invalid choice $REPLY";;
+	esac
+done
+echo "Ok."
+
 # set your domain name
-domain_name=""
-read -p 'Enter Domain Name(e.g. : example.com): ' domain_name
+if [ "$which_h" == "localhost" ]
+then
+	read -p 'Enter Domain Name(default : localhost or e.g. : example.com): ' domain_name
+	: ${domain_name:=localhost}
+	[ "$domain_name" != "localhost" ] && sudo -- sh -c -e "grep -Eq '$domain_name' /etc/hosts || echo '127.0.0.1  $domain_name' >> /etc/hosts"
+else
+	domain_name=""
+	read -p 'Enter Domain Name(e.g. : example.com): ' domain_name
+	#[ "$domain_name" != "localhost" ] && sudo -- sh -c -e "sed -i '/$domain_name/d' /etc/hosts"
+fi
 [ -z $domain_name ] && domain_name="NULL"
 host -N 0 $domain_name 2>&1 > /dev/null
 while [ $? -ne 0 ]
 do
 	echo "Try again"
-	read -p 'Enter Domain Name(e.g. : example.com): ' domain_name
+	sudo -- sh -c -e "sed -i '/$domain_name/d' /etc/hosts"
+	if [ "$which_h" == "localhost" ]
+	then
+		read -p 'Enter Domain Name(default : localhost or e.g. : example.com): ' domain_name
+		: ${domain_name:=localhost}
+		[ "$domain_name" != "localhost" ] && sudo -- sh -c -e "grep -Eq '$domain_name' /etc/hosts || echo '127.0.0.1  $domain_name' >> /etc/hosts"
+	else
+		read -p 'Enter Domain Name(e.g. : example.com): ' domain_name
+		#[ "$domain_name" != "localhost" ] && sudo -- sh -c -e "sed -i '/$domain_name/d' /etc/hosts"
+	fi
 	[ -z $domain_name ] && domain_name="NULL"
 	host -N 0 $domain_name 2>&1 > /dev/null
 done
 echo "Ok."
+
+ssl_snippet=""
+if [ "$which_h" == "localhost" ]
+then
+	ssl_snippet="echo 'Generated Self-signed SSL Certificate for localhost'"
+	if [ "$lpms" == "apk" ]
+	then
+		sudo apk add --no-cache nss-tools go git
+	elif [ "$lpms" == "dnf" ]
+	then
+		sudo dnf install nss-tools go git
+	elif [ "$lpms" == "yum" ]
+	then
+		sudo yum install nss-tools go git
+	elif [ "$lpms" == "zypper" ]
+	then
+		sudo zypper install mozilla-nss-tools go git
+	elif [ "$lpms" == "apt" ]
+	then
+		sudo apt install libnss3-tools go git
+	elif [ "$lpms" == "pacman" ]
+	then
+		sudo pacman -S nss go git
+	else
+		echo ""
+		echo "could not be detected package management system"
+		echo ""
+		exit 0
+	fi
+	sudo rm -Rf mkcert && git clone https://github.com/FiloSottile/mkcert && cd mkcert && go build -ldflags "-X main.Version=$(git describe --tags)"
+	sudo mkcert -uninstall && mkcert -install && mkcert -key-file privkey.pem -cert-file chain.pem $domain_name *.$domain_name && sudo cat privkey.pem chain.pem > fullchain.pem && sudo mkdir -p ../certbot/live/$domain_name && sudo mv *.pem ../certbot/live/$domain_name && cd ..
+	echo "Ok."
+else
+	ssl_snippet="certbot certonly --webroot --webroot-path \/tmp\/acme-challenge --rsa-key-size 4096 --non-interactive --agree-tos --no-eff-email --force-renewal --email \$\{LETSENCRYPT_EMAIL\} -d \$\{DOMAIN_NAME\} -d www.\$\{DOMAIN_NAME\}"
+fi
 
 # set parameters in env.example file
 email=""
@@ -410,15 +491,15 @@ echo "Ok."
 
 read -p "Apply changes (y/n)? " choice
 case "$choice" in
-  y|Y ) clear; echo "Yes! Proceeding now...";;
+  y|Y ) clear; echo ""; echo "Yes! Proceeding now...";;
   n|N ) echo "No! Aborting now..."; exit 0;;
   * ) echo "Invalid input! Aborting now..."; exit 0;;
 esac
 
-cp ./phpmyadmin/apache2/sites-available/default-ssl.sample.conf ./phpmyadmin/apache2/sites-available/default-ssl.conf
-cp ./database/phpmyadmin/sql/create_tables.sql.template.example ./database/phpmyadmin/sql/create_tables.sql.template
+\cp ./phpmyadmin/apache2/sites-available/default-ssl.sample.conf ./phpmyadmin/apache2/sites-available/default-ssl.conf
+\cp ./database/phpmyadmin/sql/create_tables.sql.template.example ./database/phpmyadmin/sql/create_tables.sql.template
 
-cp env.example .env
+\cp env.example .env
 
 sed -i "s/db_authentication_password/${db_authentication_password}/" ./database/phpmyadmin/sql/create_tables.sql.template
 sed -i "s|db_package_manager|${db_package_manager}|" .env
@@ -426,6 +507,7 @@ sed -i 's/db_admin_commandline/'$db_admin_commandline'/' .env
 sed -i 's/example.com/'$domain_name'/' .env
 sed -i 's/example.com/'$domain_name'/g' ./phpmyadmin/apache2/sites-available/default-ssl.conf
 sed -i 's/email@domain.com/'$email'/' .env
+sed -i "s/ssl_snippet/$ssl_snippet/" .env
 sed -i 's/which_db/'$which_db'/g' .env
 sed -i 's/db_username/'$db_username'/g' .env
 sed -i 's/db_password/'$db_password'/g' .env
