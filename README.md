@@ -168,7 +168,7 @@ Firstly: will create external volume
 docker volume create --driver local --opt type=none --opt device=${PWD}/certbot --opt o=bind certbot-etc
 ```
 
-location ssl: Generate Self-signed SSL Certificate with guide [mkcert repository](https://github.com/FiloSottile/mkcert).
+for localhost ssl: Generate Self-signed SSL Certificate with guide [mkcert repository](https://github.com/FiloSottile/mkcert).
 
 ```
 docker compose up -d
