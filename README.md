@@ -3,7 +3,8 @@
 If You want to build a website with WordPress at short time;
 
 #### Full stack Nginx WordPress:
-<p align="left"> <a href="https://wordpress.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/276006?s=200&v=4" alt="wordPress" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
+<p align="left">
+<a href="https://wordpress.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/276006?s=200&v=4" alt="wordPress" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/docker/docker.png" alt="docker" width="40" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://mariadb.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/5877084?s=200&v=4" alt="mariadb" height="50" width="50"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://dev.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/2452804?s=200&v=4" alt="mysql" height="50" width="50"/> </a>&nbsp;&nbsp;&nbsp; 
@@ -11,12 +12,13 @@ If You want to build a website with WordPress at short time;
 <a href="https://www.php.net" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/25158?s=200&v=4" alt="php" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://redis.io" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/1529926?s=200&v=4" alt="redis" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://www.varnish-software.com/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/577014?s=200&v=4" alt="varnish" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
-<a href="#" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/bash/bash.png" alt="Bash" height="50" width="50" /> </a>&nbsp;&nbsp;&nbsp;
 <a href="https://www.phpmyadmin.net/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/1351977?s=200&v=4" alt="phpmyadmin" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://certbot.eff.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/17889013?s=200&v=4" alt="certbot" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://letsencrypt.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/9289019?s=200&v=4" alt="letsencrypt" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://www.portainer.io/?hsLang=en" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/22225832?s=200&v=4" alt="portainer" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
-<a href="https://www.offen.dev/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/47735043?s=200&v=4" alt="backup" height="35" width="35"/> </a> </p>
+<a href="https://www.gnu.org/software/bash/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/bash/bash.png" alt="Bash" height="40" width="40" /> </a>&nbsp;&nbsp;&nbsp; 
+<a href="https://www.offen.dev/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/47735043?s=200&v=4" alt="backup" height="35" width="35"/> </a>
+</p>
 
 Plus, manage docker containers with Portainer.
 
@@ -27,7 +29,8 @@ Plus, manage docker containers with Portainer.
 <p align="left"> apk, dnf, yum, apt/apt-get, zypper, pacman </p>
  
 #### Supported Linux Operation Systems:
-<p align="left"> <a href="https://alpinelinux.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/7600810?s=200&v=4" alt="alpine linux" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
+<p align="left">
+<a href="https://alpinelinux.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/7600810?s=200&v=4" alt="alpine linux" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://fedoraproject.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/github/explore/e6b1e7f0fb8d0bf920bd719c7289243138bdc1b4/topics/fedora/fedora.png" alt="fedora" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://www.centos.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/79192?s=200&v=4" alt="centos" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://www.debian.org/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/1854028?s=200&v=4" alt="debian" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
@@ -35,7 +38,8 @@ Plus, manage docker containers with Portainer.
 <a href="https://www.raspberrypi.com/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/1294177?s=200&v=4" alt="ubuntu" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/33972111?s=200&v=4" alt="redhat on s390x (IBM Z)" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
 <a href="https://www.suse.com/products/server/" target="_blank" rel="noreferrer"> <img src="https://avatars.githubusercontent.com/u/623819?s=200&v=4" alt="opensuse on s390x (IBM Z)" height="40" width="40"/> </a>&nbsp;&nbsp;&nbsp; 
-<a href="https://archlinux.org/" target="_blank" rel="noreferrer"> <img src="https://gitlab.archlinux.org/uploads/-/system/group/avatar/23/iconfinder_archlinux_386451.png?width=48" alt="arch linux" height="40" width="40"/> </a> </p>
+<a href="https://archlinux.org/" target="_blank" rel="noreferrer"> <img src="https://gitlab.archlinux.org/uploads/-/system/group/avatar/23/iconfinder_archlinux_386451.png?width=48" alt="arch linux" height="40" width="40"/> </a>
+</p>
 
 ##### Note: Fedora 37, 39 and alpine linux x86-64 compatible, could not try sles IBM Z s390x, rhel IBM Z s390x and raspberrypi.
 
@@ -45,7 +49,7 @@ Plus, manage docker containers with Portainer.
 - [webserver (nginx)](https://hub.docker.com/_/nginx)
 - [certbot (letsencrypt)](https://hub.docker.com/r/certbot/certbot)
 - [phpMyAdmin](https://hub.docker.com/r/phpmyadmin/phpmyadmin/)
-- [databaseMariadb](https://hub.docker.com/_/mariadb) [databaseMysql](https://hub.docker.com/_/mysql)
+- [Mariadb](https://hub.docker.com/_/mariadb) [Mysql](https://hub.docker.com/_/mysql)
 - [redis](https://hub.docker.com/_/redis)
 - [varnish](https://hub.docker.com/_/varnish)
 - [backup](https://hub.docker.com/r/offen/docker-volume-backup)
@@ -73,8 +77,10 @@ require up to 2 GB of RAM for **Docker** and **Docker Compose**.
 #### Contents:
 
 - [Auto Configuration and Installation](#automatic)
-- [Requirements](#requirements)
 - [Manual Configuration and Installation](#manual)
+	- [Requirements](#requirements)
+	- [Configuration](#configuration)
+	- [Installation](#installation)
 - [Portainer Installation](#portainer)
 - [Usage](#usage)
 	- [Website](#website)
@@ -84,9 +90,9 @@ require up to 2 GB of RAM for **Docker** and **Docker Compose**.
 	- [phpMyAdmin](#phpmyadmin)
 	- [backup](#backup)
 
-## Automatic
+### Automatic
 
-### Exec install shell script for auto installation and configuration
+#### Exec install shell script for auto installation and configuration
 
 download with
 
@@ -102,7 +108,9 @@ chmod +x install.sh
 ./install.sh
 ```
 
-## Requirements
+### Manual
+
+#### Requirements
 
 Make sure you have the latest versions of **Docker** and **Docker Compose** installed on your machine and require up to 2 GB of RAM.
 
@@ -113,9 +121,7 @@ Clone this repository or copy the files from this repository into a new folder.
 
 Make sure to [add your user to the `docker` group](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
 
-## Manual
-
-### Configuration
+#### Configuration
 
 download with
 
@@ -135,32 +141,93 @@ Copy the example environment into `.env`
 cp env.example .env
 ```
 
-Edit the `.env` file to change values of ```LOCAL_TIMEZONE```, ```DOMAIN_NAME```, ```DIRECTORY_PATH```, ```LETSENCRYPT_EMAIL```, ```WORDPRESS_DB_USER```, ```WORDPRESS_DB_PASSWORD```, ```WORDPRESS_DB_NAME```, ```WORDPRESS_TABLE_PREFIX```, ```MYSQL_ROOT_PASSWORD```, ```DATABASE_IMAGE_NAME```, ```DATABASE_CONT_NAME```, ```DATABASE_PACKAGE_MANAGER```, ```DATABASE_ADMIN_COMMANDLINE```, ```PMA_CONTROLUSER```, ```PMA_CONTROLPASS```, ```PMA_HTPASSWD_USERNAME```, ```PMA_HTPASSWD_PASSWORD``` and ```VARNISH_VERSION```.
+Edit the `.env` file to change values of
 
-LOCAL_TIMEZONE=[to see local timezones](https://docs.diladele.com/docker/timezones.html)
+|```LOCAL_TIMEZONE```|```DOMAIN_NAME```|```DIRECTORY_PATH```|```LETSENCRYPT_EMAIL```|
+|```WORDPRESS_DB_USER```|```WORDPRESS_DB_PASSWORD```|```WORDPRESS_DB_NAME```|```WORDPRESS_TABLE_PREFIX```|```MYSQL_ROOT_PASSWORD```|```DATABASE_IMAGE_NAME```|
+|```DATABASE_CONT_NAME```|```DATABASE_PACKAGE_MANAGER```|```DATABASE_ADMIN_COMMANDLINE```|```PMA_CONTROLUSER```|```PMA_CONTROLPASS```|
+|```PMA_HTPASSWD_USERNAME```|```PMA_HTPASSWD_PASSWORD```|```VARNISH_VERSION```|```VARNISH_VERSION```|```SSL_SNIPPET```|
 
-DIRECTORY_PATH=```pwd``` at command line\
-DATABASE_IMAGE_NAME=```mariadb``` or ```mysql```\
-DATABASE_CONT_NAME=```mariadb```, ```mysql``` or ```custom name```\
-DATABASE_PACKAGE_MANAGER=```apt-get update && apt-get install -y gettext-base``` for mariadb, ```microdnf install -y gettext``` for mysql\
-DATABASE_ADMIN_COMMANDLINE=```mariadb-admin``` for mariadb, ```mysqladmin``` for mysql\
-VARNISH_VERSION=```latest``` for centos version 9+ and fedora, ```stable``` for the others\
-SSL_SNIPPET=```echo 'Generated Self-signed SSL Certificate for localhost'``` for localhost\
-SSL_SNIPPET=```certbot certonly --webroot --webroot-path /tmp/acme-challenge --rsa-key-size 4096 --non-interactive --agree-tos --no-eff-email --force-renewal --email ${LETSENCRYPT_EMAIL} -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME}``` for remotehost
+<table><thead>
+  <tr>
+    <th>Variable </th>
+    <th colspan="2">Value</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td><code>LOCAL_TIMEZONE</code></td>
+    <td colspan="2"><code><a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List" rel="nofollow">to see local timezones</a></code></td>
+  </tr>
+  <tr>
+    <td><code>DIRECTORY_PATH</code></td>
+    <td colspan="2"><code>pwd</code> at command line</td>
+  </tr>
+  <tr>
+    <td><code>WORDPRESS_TABLE_PREFIX</code></td>
+    <td colspan="2"><code>wp_</code> or <code><a href="https://mariadb.com/docs/server/reference/sql-structure/sql-language-structure/identifier-names" rel="nofollow" alt="custom value">custom value</a></code></td>
+  </tr>
+  <tr>
+    <td><code>DATABASE_IMAGE_NAME</code></td>
+    <td colspan="2"><code>mariadb</code> or <code>mysql</code></td>
+  </tr>
+  <tr>
+    <td><code>DATABASE_CONT_NAME</code></td>
+    <td colspan="2"><code>mariadb</code>, <code>mysql</code> or <code><a href="https://docs.docker.com/reference/compose-file/services/#container_name" rel="nofollow" alt="custom name">custom name</a></code></td>
+  </tr>
+  <tr>
+    <td rowspan="2"><code>DATABASE_PACKAGE_MANAGER</code></td>
+    <td>mariadb</td>
+    <td><code>apt-get update && apt-get install -y gettext-base</code></td>
+  </tr>
+  <tr>
+    <td>mysql</td>
+    <td><code>microdnf install -y gettext</code></td>
+  </tr>
+  <tr>
+    <td rowspan="2"><code>DATABASE_ADMIN_COMMANDLINE</code></td>
+    <td>mariadb</td>
+    <td><code>mariadb-admin</code></td>
+  </tr>
+  <tr>
+    <td>mysql</td>
+    <td><code>mysqladmin</code></td>
+  </tr>
+  <tr>
+    <td rowspan="2"><code>VARNISH_VERSION</code></td>
+    <td>centos version 9+ and fedora</td>
+    <td><code>latest</code></td>
+  </tr>
+  <tr>
+    <td>the others</td>
+    <td><code>stable</code></td>
+  </tr>
+  <tr>
+    <td rowspan="2"><code>SSL_SNIPPET</code></td>
+    <td>localhost</td>
+    <td><code>echo 'Generated Self-signed SSL Certificate at localhost'</code></td>
+  </tr>
+  <tr>
+    <td>remotehost</td>
+    <td><code>certbot certonly --webroot --webroot-path /tmp/acme-challenge --rsa-key-size 4096 --non-interactive --agree-tos --no-eff-email --force-renewal --email ${LETSENCRYPT_EMAIL} -d ${DOMAIN_NAME} -d www.${DOMAIN_NAME} -d mail.${DOMAIN_NAME}</code></td>
+  </tr>
+</tbody>
+</table>
 
 and
 
 ```
 cp ./phpmyadmin/apache2/sites-available/default-ssl.sample.conf ./phpmyadmin/apache2/sites-available/default-ssl.conf
 ```
+
 change example.com to your domain name in ```./phpmyadmin/apache2/sites-available/default-ssl.conf``` file.
 
 ```
 cp ./database/phpmyadmin/sql/create_tables.sql.template.example ./database/phpmyadmin/sql/create_tables.sql.template
 ```
+
 change pma_controluser and db_authentication_password in ```./database/phpmyadmin/sql/create_tables.sql.template``` file.
 
-### Installation
+#### Installation
 
 Firstly: will create external volume
 
@@ -168,7 +235,7 @@ Firstly: will create external volume
 docker volume create --driver local --opt type=none --opt device=${PWD}/certbot --opt o=bind certbot-etc
 ```
 
-for localhost ssl: Generate Self-signed SSL Certificate with guide [mkcert repository](https://github.com/FiloSottile/mkcert).
+Localhost ssl: Generate Self-signed SSL Certificate with guide [mkcert repository](https://github.com/FiloSottile/mkcert).
 
 ```
 docker compose up -d
@@ -184,7 +251,7 @@ The containers are now built and running. You should be able to access the WordP
 
 For convenience you may add a new entry into your hosts file.
 
-## Portainer
+### Portainer
 
 ```
 docker compose -f portainer-docker-compose.yml -p portainer up -d 
@@ -194,99 +261,73 @@ manage docker with [Portainer](https://www.portainer.io/) is the definitive cont
 
 You can also visit `https://example.com:9001` to access portainer after starting the containers.
 
-## Usage
+### Usage
 
 #### You could manage docker containers without command line with portainer.
 
-### Show both running and stopped containers
-
-The docker ps command only shows running containers by default. To see all containers, use the -a (or --all) flag:
+#### Here’s a quick reference of commonly used Docker Compose commands
 
 ```
-docker ps -a
+docker ps -a	# Lists all containers managed by the compose file
 ```
 
-### Starting containers
-
-You can start the containers with the `up` command in daemon mode (by adding `-d` as an argument) or by using the `start` command:
-
 ```
-docker compose start
+docker compose start	# Starts previously stopped containers
 ```
 
-### Stopping containers
-
 ```
-docker compose stop
+docker compose stop	# Stops all running containers
 ```
 
-### Removing containers
-
-To stop and remove all the containers use the `down` command:
-
 ```
-docker compose down
+docker compose down	# Stops and removes containers, networks, etc.
 ```
 
-to remove portainer and the other containers:
-
 ```
-docker rm -f $(docker ps -a -q)
+docker compose down -v # Add --volumes to remove volumes explicitly
 ```
 
-Use `-v` if you need to remove the database volume which is used to persist the database:
-
 ```
-docker compose down -v
+docker rm -f $(docker ps -a -q)	# Removes portainer and the other containers
 ```
 
-to remove external certbot-etc and portainer and the other volumes:
-
 ```
-docker volume rm $(docker volume ls -q)
+docker volume rm $(docker volume ls -q)	# Removes all volumes
 ```
 
-Delete all images, containers, volumes, and networks that are not associated with a container (dangling):
-
 ```
-docker system prune
+docker network prune	# Remove all unused networks
 ```
 
-To additionally remove any stopped containers and all unused images (not just dangling ones), add the -a flag to the command:
-
 ```
-docker system prune -a
+docker system prune	# Removes unused data (containers, networks, images, and optionally volumes)
 ```
 
-to remove portainer and the other images:
-
 ```
-docker rmi $(docker image ls -q)
+docker system prune -a	# Removes all unused images, not just dangling ones
 ```
 
-### Logs containers
-
-To fetch the logs of a container.
-
 ```
-docker container logs container_name_or_id
+docker rmi $(docker image ls -q)	# Removes portainer and the other images
 ```
 
-### Project from existing source
+```
+docker container logs container_name_or_id	# Shows logs from all services
+```
+
+#### Project from existing source
 
 Copy all files into a new directory:
 
-You can now use the `up` command:
-
 ```
-docker compose up -d
+docker compose up -d	# Starts services in detached mode (in the background)
 ```
 
-### Docker run reference
+#### Docker run reference
 
-[https://docs.docker.com/engine/reference/run/](https://docs.docker.com/engine/reference/run/)
+[https://docs.docker.com/reference/cli/docker/compose/](https://docs.docker.com/reference/cli/docker/compose/)
 
-### Website
+#### Website
 
 You should see the "Wordpress installation" page in your browser. If not, please check if your PHP installation satisfies WordPress's requirements.
 
@@ -363,7 +404,7 @@ after every change in the wordpress and the varnish configuration or if You get 
 docker container restart varnish
 ```
 
-### phpMyAdmin
+#### phpMyAdmin
 
 You can add your own custom config.inc.php settings (such as Configuration Storage setup) by creating a file named config.user.inc.php with the various user defined settings in it, and then linking it into the container using:
 
@@ -375,10 +416,10 @@ You can also visit `https://example.com:9090` to access phpMyAdmin after startin
 
 The first authorize screen(htpasswd;username or password) and phpmyadmin login screen the username and the password is the same as supplied in the `.env` file.
 
-### backup
+#### backup
 
-This will back up the all files and folders in database/dump sql and html volumes, once per day, and write it to ./backups with a filename like backup-2023-01-01T10-18-00.tar.gz
+This will back up the all files and folders in database/dump sql and html volumes, once per day, and write it to ```./backups``` with a filename like backup-2023-01-01T10-18-00.tar.gz
 
-#### can run on a custom cron schedule
+##### can run on a custom cron schedule
 
 ```BACKUP_CRON_EXPRESSION: '20 01 * * *'``` the UTC timezone.

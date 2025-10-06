@@ -307,14 +307,17 @@ if [ "$which_h" == "localhost" ]
 then
 	read -p 'Enter Domain Name(default : localhost or e.g. : example.com): ' domain_name
 	: ${domain_name:=localhost}
-	[ "$domain_name" != "localhost" ] && sudo -- sh -c -e "grep -Eq '$domain_name' /etc/hosts || echo '127.0.0.1  $domain_name' >> /etc/hosts"
+	[ "$domain_name" != "localhost" ] && sudo -- sh -c -e "grep -qxF '127.0.1.1  $domain_name' /etc/hosts || echo '127.0.1.1  $domain_name' >> /etc/hosts"
+	ping -c 1 $domain_name 2>&1 > /dev/null
 else
 	domain_name=""
 	read -p 'Enter Domain Name(e.g. : example.com): ' domain_name
 	#[ "$domain_name" != "localhost" ] && sudo -- sh -c -e "sed -i '/$domain_name/d' /etc/hosts"
+	[ -z $domain_name ] && domain_name="NULL"
+	host -N 0 $domain_name 2>&1 > /dev/null
 fi
-[ -z $domain_name ] && domain_name="NULL"
-host -N 0 $domain_name 2>&1 > /dev/null
+#[ -z $domain_name ] && domain_name="NULL"
+#host -N 0 $domain_name 2>&1 > /dev/null
 while [ $? -ne 0 ]
 do
 	echo "Try again"
@@ -323,20 +326,23 @@ do
 	then
 		read -p 'Enter Domain Name(default : localhost or e.g. : example.com): ' domain_name
 		: ${domain_name:=localhost}
-		[ "$domain_name" != "localhost" ] && sudo -- sh -c -e "grep -Eq '$domain_name' /etc/hosts || echo '127.0.0.1  $domain_name' >> /etc/hosts"
+		[ "$domain_name" != "localhost" ] && sudo -- sh -c -e "grep -qxF '127.0.1.1  $domain_name' /etc/hosts || echo '127.0.1.1  $domain_name' >> /etc/hosts"
+	ping -c 1 $domain_name 2>&1 > /dev/null
 	else
 		read -p 'Enter Domain Name(e.g. : example.com): ' domain_name
 		#[ "$domain_name" != "localhost" ] && sudo -- sh -c -e "sed -i '/$domain_name/d' /etc/hosts"
+		[ -z $domain_name ] && domain_name="NULL"
+		host -N 0 $domain_name 2>&1 > /dev/null
 	fi
-	[ -z $domain_name ] && domain_name="NULL"
-	host -N 0 $domain_name 2>&1 > /dev/null
+	#[ -z $domain_name ] && domain_name="NULL"
+	#host -N 0 $domain_name 2>&1 > /dev/null
 done
 echo "Ok."
 
 ssl_snippet=""
 if [ "$which_h" == "localhost" ]
 then
-	ssl_snippet="echo 'Generated Self-signed SSL Certificate for localhost'"
+	ssl_snippet="echo 'Generated Self-signed SSL Certificate at localhost'"
 	if [ "$lpms" == "apk" ]
 	then
 		sudo apk add --no-cache nss-tools go git
@@ -477,12 +483,12 @@ done
 echo "Ok."
 
 local_timezone_regex="^[a-zA-Z0-9/+_-]{1,}$"
-read -p 'Enter container local Timezone(default : America/Los_Angeles, to see the other timezones, https://docs.diladele.com/docker/timezones.html): ' local_timezone
+read -p 'Enter container local Timezone(default : America/Los_Angeles, to see the other timezones, https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List): ' local_timezone
 : ${local_timezone:=America/Los_Angeles}
 while [[ ! $local_timezone =~ $local_timezone_regex ]]
 do
 	echo "Try again (can only contain numerals 0-9, basic Latin letters, both lowercase and uppercase, positive, minus sign and underscore)"
-	read -p 'Enter container local Timezone(default : America/Los_Angeles, to see the other local timezones, https://docs.diladele.com/docker/timezones.html): ' local_timezone
+	read -p 'Enter container local Timezone(default : America/Los_Angeles, to see the other local timezones, https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List): ' local_timezone
 	sleep 1
 	: ${local_timezone:=America/Los_Angeles}
 done
@@ -542,7 +548,7 @@ if [ -x "$(command -v docker)" ] && [ "$(docker compose version)" ]; then
 		else
 			echo ""
 			until [ -n "$(sudo find ./certbot/live -name '$domain_name' 2>/dev/null | head -1)" ]; do
-				echo "waiting for Let's Encrypt certificates for $domain_name"
+				echo "waiting Let's Encrypt certificates for $domain_name"
 				sleep 5s & wait ${!}
 				if sudo [ -d "./certbot/live/$domain_name" ]; then break; fi
 			done

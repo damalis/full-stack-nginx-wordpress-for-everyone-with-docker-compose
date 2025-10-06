@@ -38,7 +38,7 @@ services:
             TZ: '${LOCAL_TIMEZONE}'
         labels:
             - 'docker-volume-backup.stop-during-backup=true'
-        command: bash -c "curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o - | sh -s redis && grep -qe 'date.timezone = ${LOCAL_TIMEZONE}' ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini || echo 'date.timezone = ${LOCAL_TIMEZONE}' >> ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini; docker-entrypoint.sh 'php-fpm'"
+        command: bash -c "curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o - | sh -s redis && grep -qxF 'date.timezone = ${LOCAL_TIMEZONE}' ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini || echo 'date.timezone = ${LOCAL_TIMEZONE}' >> ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini; docker-entrypoint.sh 'php-fpm'"
 
     webserver:
         depends_on:
@@ -142,9 +142,9 @@ services:
             TZ: '${LOCAL_TIMEZONE}'
         command: >
             bash -c "echo ${PMA_HTPASSWD_USERNAME}:phpmyadmin:$$( printf \"%s:%s:%s\" \"${PMA_HTPASSWD_USERNAME}\" \"phpmyadmin\" \"${PMA_HTPASSWD_PASSWORD}\" | md5sum | awk '{print $$1}' ) > ${PMA_CONF_FOLDER}/.htpasswd 
-            && printf 'AuthType Digest\\nAuthName \"phpmyadmin\"\\nAuthDigestProvider file\\nAuthUserFile ${PMA_CONF_FOLDER}/.htpasswd\\nRequire valid-user\\n' > ${WEBSERVER_DOC_ROOT}/.htaccess && a2enmod auth_digest; 
-            mkdir -p ${WEBSERVER_DOC_ROOT}/../upload && chown www-data:www-data ${WEBSERVER_DOC_ROOT}/../upload && chmod a+w ${WEBSERVER_DOC_ROOT}/../upload; mkdir -p ${WEBSERVER_DOC_ROOT}/../save && chown www-data:www-data ${WEBSERVER_DOC_ROOT}/../save && chmod a+w ${WEBSERVER_DOC_ROOT}/../save; 
-            grep -qxF 'ServerName 127.0.0.1' ${APACHE_CONFDIR_PREFIX}/apache2.conf || echo -e '\\nServerName 127.0.0.1' >> ${APACHE_CONFDIR_PREFIX}/apache2.conf; grep -qe 'date.timezone = ${LOCAL_TIMEZONE}' ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini || echo 'date.timezone = ${LOCAL_TIMEZONE}' >> ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini; 
+            && printf 'AuthType Digest\\nAuthName \"phpmyadmin\"\\nAuthDigestProvider file\\nAuthUserFile ${PMA_CONF_FOLDER}/.htpasswd\\nRequire valid-user\\n' > /var/www/html/.htaccess && a2enmod auth_digest; 
+            mkdir -p /var/www/html/../upload && chown www-data:www-data /var/www/html/../upload && chmod a+w /var/www/html/../upload; mkdir -p /var/www/html/../save && chown www-data:www-data /var/www/html/../save && chmod a+w /var/www/html/../save; 
+            grep -qxF 'ServerName 127.0.0.1' ${APACHE_CONFDIR_PREFIX}/apache2.conf || echo -e '\\nServerName 127.0.0.1' >> ${APACHE_CONFDIR_PREFIX}/apache2.conf; grep -qxF 'date.timezone = ${LOCAL_TIMEZONE}' ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini || echo 'date.timezone = ${LOCAL_TIMEZONE}' >> ${PHP_INI_DIR_PREFIX}/php/conf.d/security.ini; 
             a2enmod ssl && a2ensite default-ssl && a2dissite 000-default && /docker-entrypoint.sh 'apache2-foreground'"
 
     database:
@@ -180,7 +180,7 @@ services:
             - "docker-volume-backup.stop-during-backup=true"
             - "docker-volume-backup.archive-pre=/bin/sh -c 'mysqldump -uroot -p${MYSQL_ROOT_PASSWORD} --all-databases > /tmp/backup/db_backup_data.sql'"
             - "docker-volume-backup.exec-label=database"
-        command: bash -c "${DATABASE_PACKAGE_MANAGER} && export PMA_CONTROLUSER=${PMA_CONTROLUSER} export PMA_CONTROLPASS=${PMA_CONTROLPASS} && envsubst '$$PMA_CONTROLUSER,$$PMA_CONTROLPASS' < /docker-entrypoint-initdb.d/create_tables.sql.template > /docker-entrypoint-initdb.d/create_tables.sql && docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+        command: bash -c "${DATABASE_PACKAGE_MANAGER} && chmod 0444 ${MYSQL_CONF_PREFIX}/z-mysql.cnf && export PMA_CONTROLUSER=${PMA_CONTROLUSER} export PMA_CONTROLPASS=${PMA_CONTROLPASS} && envsubst '$$PMA_CONTROLUSER,$$PMA_CONTROLPASS' < /docker-entrypoint-initdb.d/create_tables.sql.template > /docker-entrypoint-initdb.d/create_tables.sql && docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
 
     redis:
         image: redis:latest
