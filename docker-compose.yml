@@ -163,6 +163,8 @@ services:
         restart: unless-stopped
         ports:
             - '3306:3306'
+        privileged: true
+        cgroup: host
         healthcheck:
             test: ["CMD-SHELL", "${DATABASE_ADMIN_COMMANDLINE} ping --silent || exit 1"]
             interval: 5s
