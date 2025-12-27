@@ -26,7 +26,10 @@ Plus, manage docker containers with Portainer.
 <p align="left"> arm64/aarch64, x86-64 </p>
 
 #### Supported Linux Package Manage Systems:
-<p align="left"> apk, dnf, yum, apt/apt-get, zypper, pacman </p>
+<p align="left"> apk, dnf, yum, apt/apt-get/dpkg, zypper, pacman </p>
+
+#### Supported Linux Distributions:
+<p align="left"> centos, debian, fedora, raspbian, rhel, sles, static, ubuntu </p>
  
 #### Supported Linux Operation Systems:
 <p align="left">
@@ -42,6 +45,7 @@ Plus, manage docker containers with Portainer.
 </p>
 
 ##### Note: Fedora 37, 39 and alpine linux x86-64 compatible, could not try sles IBM Z s390x, rhel IBM Z s390x and raspberrypi.
+##### After installing the repository, a system reboot is required on Red Hat OS, Arch Linux.
 
 #### With this project you can quickly run the following:
 
@@ -181,7 +185,7 @@ Edit the `.env` file to change values of
   </tr>
   <tr>
     <td>mysql</td>
-    <td><code>microdnf install -y gettext</code></td>
+    <td><code>microdnf update -y && microdnf install -y gettext</code></td>
   </tr>
   <tr>
     <td rowspan="2"><code>DATABASE_ADMIN_COMMANDLINE</code></td>
