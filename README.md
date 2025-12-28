@@ -109,7 +109,7 @@ Open a terminal and `cd` to the folder in which `docker-compose.yml` is saved an
 ```
 cd full-stack-nginx-wordpress-for-everyone-with-docker-compose
 chmod +x install.sh
-sudo LC_ALL=C.UTF-8 ./install.sh	# LC_ALL=C.UTF-8 if not os language english
+sudo LC_ALL=C.UTF-8 ./install.sh # LC_ALL=C.UTF-8 if not os language english
 ```
 
 ### Manual
