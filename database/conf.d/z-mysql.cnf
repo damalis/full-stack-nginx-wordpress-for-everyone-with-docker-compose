@@ -1,11 +1,4 @@
-[client]
-
-[mysqld]
-
-[mysqldump]
-
 [mysql]
 
-[mysqlhotcopy]
-
-[mysqld_safe]
+[mysqld]
+pid_file = /usr/local/mysql/data/mysqld.pid
