@@ -1,0 +1,4 @@
+[mysql]
+
+[mysqld]
+innodb_use_native_aio = OFF
