@@ -109,7 +109,7 @@ Open a terminal and `cd` to the folder in which `docker-compose.yml` is saved an
 ```
 cd full-stack-nginx-wordpress-for-everyone-with-docker-compose
 chmod +x install.sh
-sudo LC_ALL=C.UTF-8 ./install.sh # LC_ALL=C.UTF-8 if not os language english
+LC_ALL=C.UTF-8 ./install.sh # LC_ALL=C.UTF-8 if not os language english
 ```
 
 ### Manual
@@ -324,7 +324,7 @@ docker container logs container_name_or_id # Shows logs from all services
 Copy all files into a new directory:
 
 ```
-docker compose up -d	# Starts services in detached mode (in the background)
+docker compose up -d # Starts services in detached mode (in the background)
 ```
 
 #### Docker run reference
@@ -386,6 +386,10 @@ define('WP_REDIS_CONFIG', [
 #### Varnish Plugin
 
 add and active [Proxy Cache Purge](https://wordpress.org/plugins/varnish-http-purge/) plugin.
+
+Proxy Cahe -> Settings -> Configure Custom IP -> Set Custom IP: `varnish`
+
+Configuration file: ```./varnish/default.vcl```
 
 #####
 Go to the WordPress dashboard<br />
