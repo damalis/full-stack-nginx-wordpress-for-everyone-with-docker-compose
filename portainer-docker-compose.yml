@@ -12,7 +12,7 @@ services:
             - "9001:9443"
         environment:
             TZ: '${LOCAL_TIMEZONE}'
-        command: '--sslcert /etc/letsencrypt/live/${DOMAIN_NAME}/fullchain.pem --sslkey /etc/letsencrypt/live/${DOMAIN_NAME}/privkey.pem'
+        command: '--tlscert /etc/letsencrypt/live/${DOMAIN_NAME}/fullchain.pem --tlskey /etc/letsencrypt/live/${DOMAIN_NAME}/privkey.pem'
 
 volumes:
     portainer_data:
