@@ -12,9 +12,6 @@ backend default {
 acl purge {
     "webserver";
     "wordpress";
-    "localhost";
-    "127.0.0.1";
-    "::1";
 }
 
 sub vcl_recv {   
