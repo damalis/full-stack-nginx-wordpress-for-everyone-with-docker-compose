@@ -57,7 +57,7 @@ services:
               source: ./webserver/templates/nginx.conf.template
               target: '${NGINX_PREFIX}/templates/default.conf.template'
             - type: bind
-              source: ./webserver/ssl-option/options-ssl-nginx.conf
+              source: ./webserver/ssl-option/options-ssl-nginx-webserver.conf
               target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-nginx.conf'
             - type: bind
               source: ./ssl-conf.sh
@@ -76,7 +76,7 @@ services:
             test: ["CMD-SHELL", "/bin/pidof nginx > /dev/null || exit 1"]
             interval: 10s
             timeout: 5s
-            retries: 10
+            retries: 20
         environment:
             NGINX_HOST: ${DOMAIN_NAME}
             NGINX_PORT: 80
@@ -122,7 +122,7 @@ services:
               target: '${APACHE_CONFDIR_PREFIX}/ports.conf'
             - type: bind
               source: ./phpmyadmin/ssl-option/options-ssl-apache.conf
-              target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-apache.conf'
+              target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-apache-webserver.conf'
             - type: bind
               source: ./phpmyadmin/config.user.inc.php
               target: '${PMA_CONF_FOLDER}/config.user.inc.php'

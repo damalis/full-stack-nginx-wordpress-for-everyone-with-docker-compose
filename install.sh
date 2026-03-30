@@ -273,10 +273,11 @@ then
 fi
 
 # fixed; WARNING Memory overcommit must be enabled!
-if cat /proc/sys/vm/overcommit_memory != 1
+oc_output=$(cat /proc/sys/vm/overcommit_memory 2>&1)
+if [ $oc_output != 1 ]
 then
 	sudo sysctl -w vm.overcommit_memory=1
-	sudo echo "vm.overcommit_memory = 1" > /etc/sysctl.d/99-overcommit.conf
+	echo "vm.overcommit_memory = 1" | sudo tee -a /etc/sysctl.conf > /dev/null
 	# Apply sysctl params without reboot
 	sudo sysctl --system > /dev/null 2>&1
 fi
@@ -365,21 +366,13 @@ sleep 2
 
 # set the host
 which_h=""
-items=("localhost" "remotehost")
-PS3="which computer command line are you on? Select the host: "
-select h in "${items[@]}"
-do
-	case $REPLY in
-		1)
-			which_h=$h
-			break;;
-		2)
-			which_h=$h
-			break;;
-		*)
-			echo "Invalid choice $REPLY";;
-	esac
-done
+if [ -n "${SSH_CLIENT}" ] || [ -n "${SSH_TTY}" ] || [ -n "${SSH_CONNECTION}" ]; then
+	echo "Running REMOTELY via SSH (on another host / remote OS)"
+	which_h="remotehost"
+else
+	echo "Running LOCALLY on localhost (the same machine)"
+	which_h="localhost"
+fi
 echo "Ok."
 
 # set your domain name
