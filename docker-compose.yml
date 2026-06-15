@@ -58,7 +58,7 @@ services:
               target: '${NGINX_PREFIX}/templates/default.conf.template'
             - type: bind
               source: ./webserver/ssl-option/options-ssl-nginx-webserver.conf
-              target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-nginx.conf'
+              target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-nginx-webserver.conf'
             - type: bind
               source: ./ssl-conf.sh
               target: '/tmp/ssl-conf.sh'
