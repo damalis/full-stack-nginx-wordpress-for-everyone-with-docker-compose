@@ -27,7 +27,7 @@ services:
             test: ["CMD-SHELL", "/bin/pidof php-fpm > /dev/null || exit 1"]
             interval: 5s
             timeout: 5s
-            retries: 20
+            retries: 50
         environment:
             WORDPRESS_DB_HOST: 'database'
             WORDPRESS_DB_USER: '${WORDPRESS_DB_USER}'
@@ -121,8 +121,8 @@ services:
               source: ./phpmyadmin/apache2/ports.conf
               target: '${APACHE_CONFDIR_PREFIX}/ports.conf'
             - type: bind
-              source: ./phpmyadmin/ssl-option/options-ssl-apache.conf
-              target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-apache-webserver.conf'
+              source: ./phpmyadmin/ssl-option/options-ssl-apache-phpmyadmin.conf
+              target: '${LETSENCRYPT_CONF_PREFIX}/options-ssl-apache-phpmyadmin.conf'
             - type: bind
               source: ./phpmyadmin/config.user.inc.php
               target: '${PMA_CONF_FOLDER}/config.user.inc.php'
